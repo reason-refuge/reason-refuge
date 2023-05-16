@@ -488,7 +488,7 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
                 "style",
                 "color: green; cursor:default"
               );
-              location.replace(`${URLROOT}admin/dashboardAdmin`);
+              location.replace(`${URLROOT}admin/dashboard`);
             } else {
               check_result.innerText = data.message;
               check_result.setAttribute("style", "color: red; cursor:default");
@@ -500,5 +500,5 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
   var clickMe = document.getElementById("click");
   clickMe.click();
 } else {
-  location.replace(`${URLROOT}admin/dashboardAdmin`);
+  location.replace(`${URLROOT}admin/dashboard`);
 }
