@@ -1,6 +1,5 @@
 <?php include_once './views/inc/header.inc.php' ?>
 <link rel="stylesheet" href="<?= URLROOT ?>layout/css/formAdmin.css">
-<?php include_once './views/inc/navbar.inc.php' ?>
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">

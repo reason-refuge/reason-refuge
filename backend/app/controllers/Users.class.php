@@ -220,7 +220,7 @@ class Users extends Controller {
         }
     }
 
-    public function UserEmail()
+    public function GetUserByEmail()
     {
         header('Access-Control-Allow-Origin:*');
         header('Content-Type: application/json');

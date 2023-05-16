@@ -1,4 +1,13 @@
 const ID_USER = localStorage.getItem("ID_USER");
+
+function generateCode() {
+  var code = "";
+  for (var i = 0; i < 6; i++) {
+    code += Math.floor(Math.random() * 10);
+  }
+  return code;
+}
+
 if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
   var changeForm = document.getElementById("changeForm");
   function ForgotPassword() {
@@ -37,6 +46,216 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
       } else {
         errorEmail = "";
         email_error.innerText = errorEmail;
+        fetch(`${BACK_URLROOT}Users/GetUserByEmail`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(res => res.json())
+          .then(data => {
+            var message = data.message;
+            if (message == "Account Not Isset") {
+              email_error.innerHTML = message;
+            } else {
+              email_error.innerHTML = message;
+              email_error.setAttribute(
+                "style",
+                "color: green; cursor:default"
+              );
+              var emailUpdate = data.result.email;
+              var idUpdate = data.result.id_user;
+              var code = generateCode();
+              Email.send({
+                SecureToken: "405ab507-85ec-4bb9-adc4-e70d73fc03c0",
+                To: `${emailUpdate}`,
+                From: "uanemaro216@gmail.com",
+                Subject: "Reset Password",
+                Body: `<b>Please confirm your email</b> <br>This email has been sent to verify that ${data
+                  .result
+                  .email} and Reset Password<br>Your Confirmation Code is <b>${code}</b>`
+              }).then(message => {
+                alert("check your inbox or spam in your gmail");
+                var newForm2 = `<div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Forgot Password Admin</h3>
+                                </div>
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <form action="#" class="signin-form" id = "form2">
+                                <div class="form-group mb-3">
+                                    <label class="label" for="codeConfirmation">Code Confirmation</label>
+                                    <input type="text" class="form-control" placeholder="Code Confirmation" required name = "codeConfirmation">
+                                    <span id="code_confirm_error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Confirm Code</button>
+                                </div>
+                            </form>
+                            <p class="text-center"><span onclick="SignIn()">Cancel</span></p>`;
+                changeForm.innerHTML = newForm2;
+                var form2 = document.getElementById("form2");
+                var code_confirm_error = document.getElementById(
+                  "code_confirm_error"
+                );
+                form2.addEventListener("submit", event => {
+                  event.preventDefault();
+                  const formData2 = new FormData(form2);
+                  const data2 = Object.fromEntries(formData2);
+                  const codeInput = data2.codeConfirmation;
+                  if (code == codeInput) {
+                    code_confirm_error.innerHTML = "Code Is Valid";
+                    codeConfirmation.setAttribute(
+                      "style",
+                      "color: green; cursor:default"
+                    );
+
+                    var newForm3 = `<div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Forgot Password Admin</h3>
+                                </div>
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <form action="#" class="signin-form" id = "form3">
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Password</label>
+                                    <input type="password" class="form-control" placeholder="Password" required name = "password">
+                                    <span id="password_error"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="confirm_password">Confirmation Password</label>
+                                    <input type="password" class="form-control" placeholder="Confirmation Password" required name = "confirm_password">
+                                    <span id="confirm_password_error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Confirm Email</button>
+                                </div>
+                            </form>
+                            <p class="text-center"><span onclick="SignIn()">Cancel</span></p>`;
+                    changeForm.innerHTML = newForm3;
+
+                    var form3 = document.getElementById("form3");
+                    var password_error = document.getElementById(
+                      "password_error"
+                    );
+                    var confirm_password_error = document.getElementById(
+                      "confirm_password_error"
+                    );
+                    form3.addEventListener("submit", event => {
+                      event.preventDefault();
+                      const formData3 = new FormData(form3);
+                      const data3 = Object.fromEntries(formData3);
+                      const pass = data3.password;
+                      const confirmPass = data3.confirm_password;
+
+                      if (pass == confirmPass) {
+                        confirm_password_error.innerHTML =
+                          "Password = Confirm Password";
+                        confirm_password_error.setAttribute(
+                          "style",
+                          "color: green; cursor:default"
+                        );
+                        fetch(
+                          `${BACK_URLROOT}Users/updatePassword/${idUpdate}`,
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(data)
+                          }
+                        )
+                          .then(res => res.json())
+                          .then(data => {
+                            if (data.message == "Password Updated") {
+                              setTimeout(function() {
+                                location.reload();
+                              }, 1000);
+                            }
+                          });
+                      } else {
+                        confirm_password_error.innerHTML =
+                          "Password != Confirm Password";
+                        confirm_password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      }
+
+                      var errorPass = " ";
+                      if (data.password.length < 8) {
+                        errorPass +=
+                          "Password must be at least 8 characters long ";
+                        password_error.innerHTML = errorPass;
+                        password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      }
+                      if (!/[A-Z]/.test(data.password)) {
+                        errorPass +=
+                          "Password must contain at least one uppercase letter ";
+                        password_error.innerHTML = errorPass;
+                        password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      }
+                      if (!/[a-z]/.test(data.password)) {
+                        errorPass +=
+                          "Password must contain at least one lowercase letter ";
+                        password_error.innerHTML = errorPass;
+                        password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      }
+                      if (!/\d/.test(data.password)) {
+                        errorPass +=
+                          "Password must contain at least one number ";
+                        password_error.innerHTML = errorPass;
+                        password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      }
+                      if (data.password == " ") {
+                        errorPass = "Password Can't Be Empty";
+                        password_error.innerText = errorPass;
+                        password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      } else {
+                        password_error.innerText = errorPass;
+                        password_error.setAttribute(
+                          "style",
+                          "color: red; cursor:default"
+                        );
+                      }
+                    });
+                  } else {
+                    code_confirm_error.innerHTML = "Code Is Invalid";
+                    code_confirm_error.setAttribute(
+                      "style",
+                      "color: red; cursor:default"
+                    );
+                  }
+                });
+              });
+            }
+          });
       }
     });
   }
@@ -143,9 +362,9 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
       }
       if (data.password == " ") {
         errorPass = "Password Can't Be Empty";
-        password_error.innerText = errorPass ;
+        password_error.innerText = errorPass;
       } else {
-        password_error.innerText = errorPass ;
+        password_error.innerText = errorPass;
       }
       if (
         (errorPass == " " || !errorPass) &&
@@ -163,14 +382,14 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
         })
           .then(res => res.json())
           .then(data => {
-            if(data.message == 'Account Added'){
+            if (data.message == "Account Added") {
               location.replace(`${URLROOT}admin`);
-            }else{
+            } else {
               errorEmail = data.messageEmail;
               email_error.innerText = errorEmail;
             }
-          })
-        }
+          });
+      }
     });
   }
   function SignIn() {
@@ -243,9 +462,9 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
       }
       if (data.password == " ") {
         errorPass = "Password Can't Be Empty";
-        password_error.innerText = errorPass ;
+        password_error.innerText = errorPass;
       } else {
-        password_error.innerText = errorPass ;
+        password_error.innerText = errorPass;
       }
       if (
         (errorPass == " " || !errorPass) &&
@@ -260,19 +479,22 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
         })
           .then(res => res.json())
           .then(data => {
-            if (data.message == 'Account Susses') {
-              var result = data.result
-              var ID_USER_CHARGE = result.id_user
-              localStorage.setItem("ID_USER",ID_USER_CHARGE);
-              check_result.innerText = data.message
-              check_result . setAttribute('style','color: green; cursor:default')
-              location.replace(`${URLROOT}admin/dashboard`);
+            if (data.message == "Account Susses") {
+              var result = data.result;
+              var ID_USER_CHARGE = result.id_user;
+              localStorage.setItem("ID_USER", ID_USER_CHARGE);
+              check_result.innerText = data.message;
+              check_result.setAttribute(
+                "style",
+                "color: green; cursor:default"
+              );
+              location.replace(`${URLROOT}admin/dashboardAdmin`);
             } else {
-              check_result.innerText = data.message
-              check_result . setAttribute('style','color: red; cursor:default')
+              check_result.innerText = data.message;
+              check_result.setAttribute("style", "color: red; cursor:default");
             }
-          })
-        }
+          });
+      }
     });
   }
   var clickMe = document.getElementById("click");
