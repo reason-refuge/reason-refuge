@@ -1,2 +1,2 @@
-const URLROOT = 'http://localhost/reason-refuge/'
-const ID_USER = localStorage.getItem('ID_USER')
+const URLROOT = "http://localhost/reason-refuge/";
+const BACK_URLROOT = URLROOT + "backend/";

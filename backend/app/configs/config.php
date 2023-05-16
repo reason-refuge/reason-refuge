@@ -10,4 +10,4 @@ define('APPNAME', 'Meowpaws');
 define("DB_HOST", 'localhost');
 define("DB_USER", 'root');
 define("DB_PASSWORD", '');
-define("DB_NAME", 'Meowpaws');
+define("DB_NAME", 'reason-refuge');

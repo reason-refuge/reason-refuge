@@ -1,4 +1,5 @@
-if (ID_USER == null) {
+const ID_USER = localStorage.getItem("ID_USER");
+if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
   var changeForm = document.getElementById("changeForm");
   function ForgotPassword() {
     var newForm = `<div class="d-flex">
@@ -19,7 +20,7 @@ if (ID_USER == null) {
                                     <span id="email_error" style = "color: red; cursor:default"></span>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Confirm Email</button>
                                 </div>
                             </form>
                             <p class="text-center"><span onclick="SignIn()">Cancel</span></p>`;
@@ -77,8 +78,9 @@ if (ID_USER == null) {
                                     <input type="password" class="form-control" placeholder="Password" required name = "password">
                                     <span id="password_error" style = "color: red; cursor:default"></span>
                                 </div>
+                                <input type="hidden" name="role" value="1">
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
                                 </div>
                             </form>
                             <p class="text-center">Admin? <span onclick="SignIn(password_error)">Sign In</span></p>`;
@@ -89,6 +91,7 @@ if (ID_USER == null) {
     var adresse_error = document.getElementById("adresse_error");
     var email_error = document.getElementById("email_error");
     var password_error = document.getElementById("password_error");
+
     form.addEventListener("submit", event => {
       event.preventDefault();
       const formData = new FormData(form);
@@ -142,9 +145,32 @@ if (ID_USER == null) {
         errorPass = "Password Can't Be Empty";
         password_error.innerText = errorPass ;
       } else {
-        errorPass += " ";
         password_error.innerText = errorPass ;
       }
+      if (
+        (errorPass == " " || !errorPass) &&
+        (errorEmail == " " || !errorEmail) &&
+        (errorAdresse == " " || !errorAdresse) &&
+        (errorPrenom == " " || !errorPrenom) &&
+        (errorNom == " " || !errorNom)
+      ) {
+        fetch(`${BACK_URLROOT}Users/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if(data.message == 'Account Added'){
+              location.replace(`${URLROOT}admin`);
+            }else{
+              errorEmail = data.messageEmail;
+              email_error.innerText = errorEmail;
+            }
+          })
+        }
     });
   }
   function SignIn() {
@@ -164,15 +190,17 @@ if (ID_USER == null) {
                                     <label class="label" for="email">Email</label>
                                     <input type="email" class="form-control" placeholder="Email" required name = "email">
                                     <span id="email_error" style = "color: red; cursor:default"></span>
-                                </div>
-                                <div class="form-group mb-3">
+                                    </div>
+                                    <div class="form-group mb-3">
                                     <label class="label" for="password">Password</label>
                                     <input type="password" class="form-control" placeholder="Password" required name = "password">
                                     <span id="password_error" style = "color: red; cursor:default"></span>
-                                </div>
-                                <div class="form-group">
+                                    <span id="check_result"></span>
+                                    </div>
+                                    <input type="hidden" name="role" value="1">
+                                    <div class="form-group">
                                     <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
-                                </div>
+                                    </div>
                                 <div class="form-group d-md-flex">
                                     <div class="w-100 text-md-right">
                                         <span  onclick="ForgotPassword()">Forgot Password</span>
@@ -184,6 +212,7 @@ if (ID_USER == null) {
     var form = document.getElementById("form");
     var email_error = document.getElementById("email_error");
     var password_error = document.getElementById("password_error");
+    var check_result = document.getElementById("password_error");
     form.addEventListener("submit", event => {
       event.preventDefault();
       const formData = new FormData(form);
@@ -216,13 +245,38 @@ if (ID_USER == null) {
         errorPass = "Password Can't Be Empty";
         password_error.innerText = errorPass ;
       } else {
-        errorPass += " ";
         password_error.innerText = errorPass ;
       }
+      if (
+        (errorPass == " " || !errorPass) &&
+        (errorEmail == " " || !errorEmail)
+      ) {
+        fetch(`${BACK_URLROOT}Users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.message == 'Account Susses') {
+              var result = data.result
+              var ID_USER_CHARGE = result.id_user
+              localStorage.setItem("ID_USER",ID_USER_CHARGE);
+              check_result.innerText = data.message
+              check_result . setAttribute('style','color: green; cursor:default')
+              location.replace(`${URLROOT}admin/dashboard`);
+            } else {
+              check_result.innerText = data.message
+              check_result . setAttribute('style','color: red; cursor:default')
+            }
+          })
+        }
     });
   }
   var clickMe = document.getElementById("click");
   clickMe.click();
 } else {
-  location.replace(`${URLROOT}admin/dashboard`);
+  location.replace(`${URLROOT}admin/dashboardAdmin`);
 }

@@ -1,5 +1,5 @@
 <?php include_once './views/inc/header.inc.php' ?>
-<link rel="stylesheet" href="<?= URLROOT ?>layout/css/form.css">
+<link rel="stylesheet" href="<?= URLROOT ?>layout/css/formAdmin.css">
 <?php include_once './views/inc/navbar.inc.php' ?>
 <section class="ftco-section">
     <div class="container">
@@ -46,4 +46,4 @@
     </div>
 </section>
 <?php include_once './views/inc/footer.inc.php' ?>
-<script src=" <?=URLROOT?>/layout/js/form.js"></script>
+<script src=" <?=URLROOT?>/layout/js/formAdmin.js"></script>

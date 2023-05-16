@@ -17,25 +17,24 @@ class Users extends Controller {
         
         
         $data = json_decode( file_get_contents( 'php://input' ) );
-        $name = $data->username;
+        $nom = $data->nom;
+        $prenom = $data->prenom;
         $email = $data->email;
         $password = $data->password;
         $hashPass = password_hash($password,PASSWORD_DEFAULT);
-        $avatar = 'avatar.png';
+        $adresse = $data->adresse;
+        $role = $data->role;
 
+        $issetEmail = 0;
         if ( $this->userModel->getUserByEmail($email) ) {
             $issetEmail = 1;
         } 
-        if ( $this->userModel->getUserByUsername($name) ) {
-            $issetUsername = 1;
-        } 
-        if($issetEmail == 0 && $issetUsername ==0) {
-            if ( $this->userModel->register($name, $email, $hashPass, $avatar) ) {
+        if($issetEmail == 0) {
+            if ( $this->userModel->register($nom,$prenom, $email, $hashPass, $adresse,$role) ) {
                 echo json_encode(
                     array( 
                         'message' => 'Account Added',
-                        'messageEmail' => '',
-                        'messageUsername' => ''
+                        'messageEmail' => ''
                         )
                 );
             }
@@ -43,8 +42,7 @@ class Users extends Controller {
             echo json_encode(
                 array( 
                     'message' => 'Account Not Added',
-                    'messageEmail' => 'Email Isset',
-                    'messageUsername' => 'Username Isset'
+                    'messageEmail' => 'Email Isset'
                     )
             );
         }
@@ -59,8 +57,13 @@ class Users extends Controller {
         $data = json_decode(file_get_contents("php://input"));
         $email = $data->email;
         $password = $data->password;
-        if($this->userModel->login($email,$password)) {
-            $row = $this->userModel->getUserByEmailOrUsername($email);
+        $role = $data->role;
+
+        $result = $this->userModel->login($email,$password,$role);
+        $check = $result['check'];
+        
+        if($check) {
+            $row = $result['row'];
             echo json_encode(
             array(
                 'message' => 'Account Susses',

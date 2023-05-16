@@ -8,38 +8,28 @@ class User
     }
     public function delete($id)
     {
-        $this->db->query("DELETE FROM users WHERE id_u = :id");
+        $this->db->query("DELETE FROM utilisateur WHERE id_user = :id");
         $this->db->bind(':id', $id);
         if ($this->db->execute())
             return true;
         else
             return false;
     }
-    public function updateAuto($username,$password,$id)
+    public function updateUser($nom_user, $password_user, $id)
     {
-        $this->db->query("UPDATE `users` SET`username`= :username,`password`=:password WHERE `id_u` = :id");
-        $this->db->bind(':username', $username);
-        $this->db->bind(':password', $password);
+        $this->db->query("UPDATE `utilisateur` SET`nom_user`= :nom_user WHERE `id_user` = :id");
+        $this->db->bind(':nom_user', $nom_user);
+        $this->db->bind(':password_user', $password_user);
         $this->db->bind(':id', $id);
         if ($this->db->execute())
             return true;
         else
             return false;
     }
-    public function updateAvatar($avatar,$id)
+    public function updatePassword($password_user, $id)
     {
-        $this->db->query("UPDATE `users` SET`avatar_user`=:avatar WHERE `id_u` = :id");
-        $this->db->bind(':avatar', $avatar);
-        $this->db->bind(':id', $id);
-        if ($this->db->execute())
-            return true;
-        else
-            return false;
-    }
-    public function updatePassword($password,$id)
-    {
-        $this->db->query("UPDATE `users` SET`password`=:password WHERE `id_u` = :id");
-        $this->db->bind(':password', $password);
+        $this->db->query("UPDATE `utilisateur` SET`password_user`=:password_user WHERE `id_user` = :id");
+        $this->db->bind(':password_user', $password_user);
         $this->db->bind(':id', $id);
         if ($this->db->execute())
             return true;
@@ -48,7 +38,7 @@ class User
     }
     public function getUserByEmail($email)
     {
-        $this->db->query("SELECT * FROM users WHERE email = :email");
+        $this->db->query("SELECT * FROM utilisateur WHERE email_user = :email");
         $this->db->bind(":email", $email);
         $this->db->execute();
         if ($this->db->fetch())
@@ -56,64 +46,53 @@ class User
         else
             return false;
     }
-    public function getUserByUsername($username)
-    {
-        $this->db->query("SELECT * FROM users WHERE username = :username");
-        $this->db->bind(":username", $username);
-        $this->db->execute();
-        if ($this->db->fetch())
-            return $this->db->fetch();
-        else
-            return false;
-    }
-    public function getUserByEmailOrUsername($libelle)
-    {
-        $this->db->query("SELECT * FROM users u WHERE u.username LIKE '%$libelle%' OR u.email LIKE '%$libelle%'");
-        $this->db->execute();
-        if ($this->db->fetch())
-            return $this->db->fetch();
-        else
-            return false;
-    }
-    public function register($name, $email, $password, $avatar)
+    public function register($nom, $prenom, $email, $hashPass, $adresse, $role)
     {
 
-        $this->db->query('INSERT INTO users(username,email,password,avatar_user) VALUES (:name,:email,:password,:avatar)');
-        $this->db->bind(':name', $name);
+        $this->db->query('INSERT INTO utilisateur(nom_user,email_user,password_user,adresse_user,prenom_user,role_user) VALUES (:nom,:email,:hashPass,:adresse,:prenom,:role)');
+        $this->db->bind(':nom', $nom);
         $this->db->bind(':email', $email);
-        $this->db->bind(':password', $password);
-        $this->db->bind(':avatar', $avatar);
-        if ($this->db->execute()){
+        $this->db->bind(':hashPass', $hashPass);
+        $this->db->bind(':adresse', $adresse);
+        $this->db->bind(':role', $role);
+        $this->db->bind(':prenom', $prenom);
+        if ($this->db->execute()) {
             return true;
-        }
-        else
+        } else
             return false;
     }
-    public function login($libelle, $password)
+    public function login($email, $password, $role)
     {
-        $this->db->query("SELECT * FROM users u WHERE u.username LIKE '%$libelle%' OR u.email LIKE '%$libelle%'");
+        $this->db->query('SELECT * FROM utilisateur WHERE email_user = :email');
+        $this->db->bind(':email', $email);
         $row = $this->db->fetch();
-        $hashed_password = $row->password;
-        if (password_verify($password, $hashed_password)) {
-            return true;
+        if ($row) {
+            $hashed_password = $row->password_user;
+            $roleInfo = $row->role_user;
+            if ($roleInfo == $role && password_verify($password, $hashed_password)) {
+                $result = [
+                    "check" => true,
+                    "row" => $row
+                ];
+                return $result;
+            } else {
+                $result = [
+                    "check" => false
+                ];
+                return $result;
+            }
         } else {
-            return false;
+            $result = [
+                "check" => false
+            ];
+            return $result;
         }
     }
     public function getInfo($id)
     {
-        $this->db->query("SELECT * FROM users WHERE id_u = :id");
+        $this->db->query("SELECT * FROM utilisateur WHERE id_user = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->fetch();
         return $row;
-    }
-    public function Update( $table, $sql, $id )
- {
-        $sql = "UPDATE $table SET $sql WHERE $id";
-        $this->db->query( $sql );
-        if ( $this->db->execute() )
-        return true;
-        else
-        return false;
     }
 }
