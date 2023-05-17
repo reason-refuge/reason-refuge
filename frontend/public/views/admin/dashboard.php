@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?= URLROOT ?>layout/css/dashboard.css">
-<link rel="stylesheet" href="<?= URLROOT ?>layout/css/navbar.css">
+
 <?php include_once './views/inc/header.inc.php' ?>
 <input type="hidden" value="Dashboard" id="activeLi">
 <?php include_once './views/inc/navbarAdmin.inc.php' ?>

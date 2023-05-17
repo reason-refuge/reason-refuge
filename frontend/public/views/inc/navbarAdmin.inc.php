@@ -1,14 +1,11 @@
-<section class="ftco-section">
+<section class="ftco-section fixNav">
 		<div>
 			<nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
 		    <div class="container-fluid">
 		    	<a class="navbar-brand" href="<?=URLROOT?>admin/dashboard"><img class="logoNav" src="<?= URLROOT ?>layout/image/logo-reason-rufuge.png" alt="logo"></a>
 		    	<div class="social-media order-lg-last">
 		    		<p class="mb-0 d-flex">
-		    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-		    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-		    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-		    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+		    			<a href="<?=URLROOT?>admin/logout" class="d-flex align-items-center justify-content-center"><span class="fa fa-user" title="LogOut"><i class="sr-only">Facebook</i></span></a>
 		    		</p>
 	        </div>
 		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
