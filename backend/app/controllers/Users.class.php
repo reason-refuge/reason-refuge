@@ -1,49 +1,77 @@
 <?php
 
-class Users extends Controller {
+class Users extends Controller
+{
 
     private $userModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = $this->model('User');
+    }
+
+    public function TotalUsersAdminFournisseur($numero)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $Users = $this->userModel->getUsers($numero);
+        $totalUser = count($Users);
+
+        if ($totalUser == 0) {
+            echo json_encode(
+                array(
+                    'message' => '0 User'
+                )
+            );
+        } else {
+            echo json_encode(
+                array(
+                    'message' => 'Users Number',
+                    'result' => $totalUser
+                )
+            );
+        }
     }
 
     public function register()
     {
-        header( 'Access-Control-Allow-Origin: *' );
-        header( 'Content-Type: application/json' );
-        header( 'Access-Control-Allow-Method: POST' );
-        header( 'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation' );
-        
-        
-        $data = json_decode( file_get_contents( 'php://input' ) );
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+
+        $data = json_decode(file_get_contents('php://input'));
         $nom = $data->nom;
         $prenom = $data->prenom;
         $email = $data->email;
         $password = $data->password;
-        $hashPass = password_hash($password,PASSWORD_DEFAULT);
+        $hashPass = password_hash($password, PASSWORD_DEFAULT);
         $adresse = $data->adresse;
         $role = $data->role;
 
         $issetEmail = 0;
-        if ( $this->userModel->getUserByEmail($email) ) {
+        if ($this->userModel->getUserByEmail($email)) {
             $issetEmail = 1;
-        } 
-        if($issetEmail == 0) {
-            if ( $this->userModel->register($nom,$prenom, $email, $hashPass, $adresse,$role) ) {
+        }
+        if ($issetEmail == 0) {
+            if ($this->userModel->register($nom, $prenom, $email, $hashPass, $adresse, $role)) {
                 echo json_encode(
-                    array( 
+                    array(
                         'message' => 'Account Added',
                         'messageEmail' => ''
-                        )
+                    )
                 );
             }
-        } else{
+        } else {
             echo json_encode(
-                array( 
+                array(
                     'message' => 'Account Not Added',
                     'messageEmail' => 'Email Isset'
-                    )
+                )
             );
         }
     }
@@ -52,69 +80,67 @@ class Users extends Controller {
         header('Access-Control-Allow-Origin:*');
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: POST');
-        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');        
-    
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
         $data = json_decode(file_get_contents("php://input"));
         $email = $data->email;
         $password = $data->password;
         $role = $data->role;
 
-        $result = $this->userModel->login($email,$password,$role);
+        $result = $this->userModel->login($email, $password, $role);
         $check = $result['check'];
-        
-        if($check) {
+
+        if ($check) {
             $row = $result['row'];
             echo json_encode(
-            array(
-                'message' => 'Account Susses',
-                'result' => $row
-            )
+                array(
+                    'message' => 'Account Susses',
+                    'result' => $row
+                )
             );
         } else {
             echo json_encode(
-            array('message' => 'Didn\'t Account Susses' )
+                array('message' => 'Didn\'t Account Susses')
             );
         }
-
     }
     public function Delete($id)
     {
         header('Access-Control-Allow-Origin:*');
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: GET');
-        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');   
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
 
         if ($this->userModel->delete($id)) {
             echo json_encode(
                 array(
                     'message' => 'Account Deleted'
                 )
-                );
-            }else{
-                echo json_encode(
-                array('message' => 'Account Didn\'t Deleted' )
-                );
-            }
-        
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Account Didn\'t Deleted')
+            );
+        }
     }
     public function Info($id)
     {
         header('Access-Control-Allow-Origin:*');
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: GET');
-        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');        
-    
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
         $info = $this->userModel->getInfo($id);
-        if($info){
+        if ($info) {
             echo json_encode(
                 array(
                     'message' => 'Account Info',
                     'result' => $info
                 )
-                );
-        }else{
+            );
+        } else {
             echo json_encode(
-            array('message' => 'Account Didn\'t Issit' )
+                array('message' => 'Account Didn\'t Issit')
             );
         }
     }
@@ -130,7 +156,7 @@ class Users extends Controller {
         $name = $data->file;
 
         if ($name != '' && !empty($name)) {
-            $this->userModel->updateAvatar($name,$id_u);
+            $this->userModel->updateAvatar($name, $id_u);
             echo json_encode(
                 array(
                     'message' => 'Avatar Updated'
@@ -145,7 +171,7 @@ class Users extends Controller {
 
     public function UpdateUser($id)
     {
-        
+
         header('Access-Control-Allow-Origin:*');
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: PUT');
@@ -226,22 +252,22 @@ class Users extends Controller {
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: POST');
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
-        
+
         $data = json_decode(file_get_contents("php://input"));
 
         $email = $data->email;
 
         $info = $this->userModel->getUserByEmail($email);
-        if($info){
+        if ($info) {
             echo json_encode(
                 array(
                     'message' => 'Account Isset',
                     'result' => $info
                 )
-                );
-        }else{
+            );
+        } else {
             echo json_encode(
-            array('message' => 'Account Not Isset' )
+                array('message' => 'Account Not Isset')
             );
         }
     }
@@ -251,20 +277,20 @@ class Users extends Controller {
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: POST');
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
-        
+
         $data = json_decode(file_get_contents("php://input"));
 
         $password = $data->password;
-        $hashPass = password_hash($password,PASSWORD_DEFAULT);
+        $hashPass = password_hash($password, PASSWORD_DEFAULT);
 
-        $info = $this->userModel->updatePassword($hashPass,$id);
-        if($info){
+        $info = $this->userModel->updatePassword($hashPass, $id);
+        if ($info) {
             echo json_encode(
                 array('message' => 'Password Updated')
             );
-        }else{
+        } else {
             echo json_encode(
-            array('message' => 'Password Not Updated' )
+                array('message' => 'Password Not Updated')
             );
         }
     }

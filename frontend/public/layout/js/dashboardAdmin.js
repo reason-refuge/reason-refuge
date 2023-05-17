@@ -12,4 +12,16 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
     function editDeleteUser() {
         location.replace(`${URLROOT}admin/editDeleteUser`);
     }
+
+    var totalUsers = document.getElementById('totalUsers')
+    fetch(`${BACK_URLROOT}Users/TotalUsersAdminFournisseur/0`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+            totalUsers.innerText = data.result
+        })
 }

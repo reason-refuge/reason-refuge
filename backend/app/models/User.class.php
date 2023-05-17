@@ -46,6 +46,13 @@ class User
         else
             return false;
     }
+    public function getUsers($role)
+    {
+        $this->db->query("SELECT * FROM utilisateur WHERE role_user = :role");
+        $this->db->bind(':role', $role);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
     public function register($nom, $prenom, $email, $hashPass, $adresse, $role)
     {
 

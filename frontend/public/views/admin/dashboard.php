@@ -21,7 +21,7 @@
                         <ul>
                             <li></li>
                             <li>
-                                <p class="card__price-value">5754</p>
+                                <p class="card__price-value" id="totalUsers"></p>
                             </li>
                             <li></li>
                         </ul>
