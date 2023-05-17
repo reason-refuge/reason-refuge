@@ -36,6 +36,27 @@ class Users extends Controller
         }
     }
 
+    public function GetUsersAdminFournisseur($role){
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $users = $this->userModel->getUsers($role);
+        if ($users) {
+            echo json_encode(
+                array(
+                    'message' => 'Users Issets',
+                    'result' => $users
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'No User')
+            );
+        }
+    }
+
     public function register()
     {
         header('Access-Control-Allow-Origin: *');

@@ -89,3 +89,6 @@ input[type="submit"]:hover {
     color: red !important;
     cursor:default !important;
 }
+.table-bordered {
+    border: 1px solid #ddd !important;
+  }

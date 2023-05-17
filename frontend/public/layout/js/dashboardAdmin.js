@@ -7,10 +7,10 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
         location.replace(`${URLROOT}admin/addUser`);
     }
     function seeUsers() {
-        location.replace(`${URLROOT}admin/utilisateur`);
+        location.replace(`${URLROOT}admin/utilisateurs`);
     }
     function editDeleteUser() {
-        location.replace(`${URLROOT}admin/editDeleteUser`);
+        location.replace(`${URLROOT}admin/actionUser`);
     }
 
     var totalUsers = document.getElementById('totalUsers')

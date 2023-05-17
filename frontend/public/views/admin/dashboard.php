@@ -37,8 +37,8 @@
                             <div class="button" onclick="seeUsers()" title="Voir Utilisateurs">
                                 <i class="fa fa-users icon" aria-hidden="true"></i>
                             </div>
-                            <div class="button" onclick="editDeleteUser()" title="Modifier Ou Supprimer Utilisateur">
-                                <i class="fa fa-pencil icon" aria-hidden="true"></i>
+                            <div class="button" onclick="editDeleteUser()" title="Ajouter Ou Modifier Ou Supprimer Utilisateur">
+                                <i class="fa fa-cogs icon" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
