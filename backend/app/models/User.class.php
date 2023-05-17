@@ -62,8 +62,7 @@ class User
     }
     public function getUserById($role,$id)
     {
-        $this->db->query("SELECT * FROM utilisateur WHERE libelle LIKE '%votre_libelle%'
-        role_user = :role AND id_user = :id");
+        $this->db->query("SELECT * FROM utilisateur WHERE role_user = :role AND id_user = :id");
         $this->db->bind(':role', $role);
         $this->db->bind(':id', $id);
         $row = $this->db->fetch();
@@ -117,5 +116,14 @@ class User
         $this->db->bind(':id', $id);
         $row = $this->db->fetch();
         return $row;
+    }
+    public function Update($sql,$id)
+    {
+        $query = "UPDATE `utilisateur` SET $sql WHERE id_user = $id";
+        $this->db->query($query);
+        if ($this->db->execute())
+            return true;
+        else
+            return false;
     }
 }

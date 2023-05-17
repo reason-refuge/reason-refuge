@@ -240,63 +240,31 @@ class Users extends Controller
 
         $data = json_decode(file_get_contents("php://input"));
 
-        $name = $data->name;
+        $name = $data->nom;
         if ($name != '' && !empty($name)) {
-            $name = 'name = "' . $name . '"';
-            $returnName = $this->userModel->Update('users', $name, 'id_u =' . $id);
+            $name = 'nom_user = "' . $name . '"';
+            $returnName = $this->userModel->Update($name,$id);
         } else {
             $returnName = false;
         }
 
         $prenom = $data->prenom;
         if ($prenom != '' && !empty($prenom)) {
-            $prenom = 'prenom = "' . $prenom . '"';
-            $returnPrenom = $this->userModel->Update('users', $prenom, 'id_u =' . $id);
+            $prenom = 'prenom_user = "' . $prenom . '"';
+            $returnPrenom = $this->userModel->Update($prenom,$id);
         } else {
             $returnPrenom = false;
         }
 
-        $number = $data->number;
-        if ($number != '' && !empty($number)) {
-            $number = 'number= "' . $number . '"';
-            $returnNumber = $this->userModel->Update('users', $number, 'id_u =' . $id);
+        $adresse = $data->adresse;
+        if ($adresse != '' && !empty($adresse)) {
+            $adresse = 'adresse_user= "' . $adresse . '"';
+            $returnAdresse = $this->userModel->Update($adresse,$id);
         } else {
-            $returnNumber = false;
+            $returnAdresse = false;
         }
 
-        $adress = $data->adress;
-        if ($adress != '' && !empty($adress)) {
-            $adress = 'adress= "' . $adress . '"';
-            $returnAdress = $this->userModel->Update('users', $adress, 'id_u =' . $id);
-        } else {
-            $returnAdress = false;
-        }
-
-        $postCode = $data->postCode;
-        if ($postCode != '' && !empty($postCode)) {
-            $postCode = 'postcode= "' . $postCode . '"';
-            $returnPostcode = $this->userModel->Update('users', $postCode, 'id_u =' . $id);
-        } else {
-            $returnPostcode = false;
-        }
-
-        $state = $data->state;
-        if ($state != '' && !empty($state)) {
-            $state = 'State= "' . $state . '"';
-            $returnState = $this->userModel->Update('users', $state, 'id_u =' . $id);
-        } else {
-            $returnState = false;
-        }
-
-        $country = $data->country;
-        if ($country != '' && !empty($country)) {
-            $country = 'Country= "' . $country . '"';
-            $returnCountry = $this->userModel->Update('users', $country, 'id_u =' . $id);
-        } else {
-            $returnCountry = false;
-        }
-
-        if ($returnName || $returnPrenom || $returnNumber || $returnAdress || $returnPostcode || $returnState || $returnCountry) {
+        if ($returnName || $returnPrenom  || $returnAdresse) {
             echo json_encode(
                 array('message' => 'Account Updated')
             );

@@ -90,23 +90,29 @@ if (!ID_USER || ID_USER === "null" || ID_USER === "undefined") {
       pass_error.classList = "error_danger";
     }
 
-    if (errorNom == 0 && errorPrenom == 0 && errorEmail == 0 && errorPass == 0 && errorAdresse == 0) {
-        fetch(`${BACK_URLROOT}Users/register`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-          })
-            .then(res => res.json())
-            .then(data => {
-              if (data.message == "Account Added") {
-                location.replace(`${URLROOT}admin/utilisateurs`);
-              } else {
-                email_error.innerHTML = data.messageEmail;
-                email_error.classList = "error_danger";
-              }
-            });
+    if (
+      errorNom == 0 &&
+      errorPrenom == 0 &&
+      errorEmail == 0 &&
+      errorPass == 0 &&
+      errorAdresse == 0
+    ) {
+      fetch(`${BACK_URLROOT}Users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message == "Account Added") {
+            location.replace(`${URLROOT}admin/utilisateurs`);
+          } else {
+            email_error.innerHTML = data.messageEmail;
+            email_error.classList = "error_danger";
+          }
+        });
     }
   });
 }
