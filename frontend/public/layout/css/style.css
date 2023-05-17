@@ -92,3 +92,62 @@ input[type="submit"]:hover {
 .table-bordered {
     border: 1px solid #ddd !important;
   }
+  
+  form {
+    position: relative;
+    width: 30rem;
+    background: #57bd84;
+    border-radius: 0.7rem;
+  }
+  
+  input,
+  button {
+    height: 5rem;
+    font-family: 'Lato', sans-serif;
+    border: 0;
+    color: #2f2f2f;
+    font-size: 1.8rem;
+    height: 9vh;
+  }
+  
+  input[type="search"] {
+    outline: 0;
+    width: 100%;
+    background: #fff;
+    padding: 0 1.6rem;
+    border-radius: 0.7rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all 0.3s cubic-bezier(0, 0, 0.43, 1.49);
+    transition-property: width, border-radius;
+    z-index: 1;
+    position: relative;
+  }
+  
+  button {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6rem;
+    font-weight: bold;
+    background: #57bd84;
+    border-radius: 0 0.7rem 0.7rem 0;
+    cursor:pointer;
+  }
+  
+  input:not(:placeholder-shown) {
+    border-radius: 0.7rem 0 0 0.7rem;
+    width: calc(100% - 6rem);
+  }
+  
+  input:not(:placeholder-shown) + button {
+    display: block;
+  }
+  
+  .search{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem;
+  }

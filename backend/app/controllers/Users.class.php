@@ -56,6 +56,46 @@ class Users extends Controller
             );
         }
     }
+    public function SearchUsersAdminFournisseurById($role,$id){
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $users = $this->userModel->getUserById($role,$id);
+        if ($users) {
+            echo json_encode(
+                array(
+                    'message' => 'User Isset',
+                    'result' => $users
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'No User')
+            );
+        }
+    }
+    public function SearchUsersAdminFournisseurByLibel($role,$libel){
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $users = $this->userModel->getUserByLibel($role,$libel);
+        if ($users) {
+            echo json_encode(
+                array(
+                    'message' => 'Users Issets',
+                    'result' => $users
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'No User')
+            );
+        }
+    }
 
     public function register()
     {

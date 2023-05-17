@@ -53,6 +53,22 @@ class User
         $row = $this->db->fetchAll();
         return $row;
     }
+    public function getUserByLibel($role,$libel)
+    {
+        $sql = "SELECT * FROM utilisateur WHERE (role_user = 0 AND nom_user LIKE '%".$libel."%') OR (role_user = 0 AND prenom_user LIKE '%".$libel."%') OR (role_user = 0 AND adresse_user LIKE '%".$libel."%') OR (role_user = 0 AND email_user LIKE '%".$libel."%')";
+        $this->db->query($sql);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
+    public function getUserById($role,$id)
+    {
+        $this->db->query("SELECT * FROM utilisateur WHERE libelle LIKE '%votre_libelle%'
+        role_user = :role AND id_user = :id");
+        $this->db->bind(':role', $role);
+        $this->db->bind(':id', $id);
+        $row = $this->db->fetch();
+        return $row;
+    }
     public function register($nom, $prenom, $email, $hashPass, $adresse, $role)
     {
 
