@@ -55,7 +55,7 @@ class User
     }
     public function getUserByLibel($role,$libel)
     {
-        $sql = "SELECT * FROM utilisateur WHERE (role_user = 0 AND nom_user LIKE '%".$libel."%') OR (role_user = 0 AND prenom_user LIKE '%".$libel."%') OR (role_user = 0 AND adresse_user LIKE '%".$libel."%') OR (role_user = 0 AND email_user LIKE '%".$libel."%')";
+        $sql = "SELECT * FROM utilisateur WHERE (role_user = $role AND nom_user LIKE '%".$libel."%') OR (role_user = $role AND prenom_user LIKE '%".$libel."%') OR (role_user = $role AND adresse_user LIKE '%".$libel."%') OR (role_user = $role AND email_user LIKE '%".$libel."%')";
         $this->db->query($sql);
         $row = $this->db->fetchAll();
         return $row;
