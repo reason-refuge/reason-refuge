@@ -205,31 +205,6 @@ class Users extends Controller
             );
         }
     }
-    public function UpdateImage($id_u)
-    {
-        header('Access-Control-Allow-Origin:*');
-        header('Content-Type: application/json');
-        header('Access-Control-Allow-Method: POST');
-        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
-
-        $data = json_decode(file_get_contents("php://input"));
-
-        $name = $data->file;
-
-        if ($name != '' && !empty($name)) {
-            $this->userModel->updateAvatar($name, $id_u);
-            echo json_encode(
-                array(
-                    'message' => 'Avatar Updated'
-                )
-            );
-        } else {
-            echo json_encode(
-                array('message' => 'Avatar Not Updated')
-            );
-        }
-    }
-
     public function UpdateUser($id)
     {
 
