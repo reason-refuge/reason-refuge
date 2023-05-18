@@ -1,196 +1,228 @@
-.MisEnForm{
-  margin-top: 7rem !important;
+.MisEnForm {
+    margin-top: 7rem !important;
 }
-.icon{
-  left: 25%;
-  font-size: 30px !important;
-  position: absolute;
-  top: 23%;
-  color: #3300ff;
+
+.icon {
+    left: 25%;
+    font-size: 30px !important;
+    position: absolute;
+    top: 23%;
+    color: #3300ff;
 }
-a{
-  text-decoration: none !important;
+
+a {
+    text-decoration: none !important;
 }
 
 #addUser {
-  max-width: 400px;
-  margin: 0 auto;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .divForm {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
-}.divForm {
-  margin-bottom: 20px;
+    background-color: #45a049;
+}
+
+.divForm {
+    margin-bottom: 20px;
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  height: auto;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: auto;
 }
 
 input[type="submit"] {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100% !important;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100% !important;
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 .error_success {
-  color: green !important;
-  cursor:default !important;
+    color: green !important;
+    cursor: default !important;
 }
+
 .error_danger {
-  color: red !important;
-  cursor:default !important;
+    color: red !important;
+    cursor: default !important;
 }
+
 .table-bordered {
-  border: 1px solid #ddd !important;
+    border: 1px solid #ddd !important;
 }
 
 .formMe {
-  position: relative;
-  width: 30rem;
-  background: #57bd84;
-  border-radius: 0.7rem;
+    position: relative;
+    width: 30rem;
+    background: #57bd84;
+    border-radius: 0.7rem;
 }
 
 .inputMe,
 .buttonMe {
-  height: 5rem;
-  font-family: 'Lato', sans-serif;
-  border: 0;
-  color: #2f2f2f;
-  font-size: 1.8rem;
-  height: 9vh;
+    height: 5rem;
+    font-family: 'Lato', sans-serif;
+    border: 0;
+    color: #2f2f2f;
+    font-size: 1.8rem;
+    height: 9vh;
 }
 
 .inputMe {
-  outline: 0;
-  width: 100%;
-  background: #fff;
-  padding: 0 1.6rem;
-  border-radius: 0.7rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  transition: all 0.3s cubic-bezier(0, 0, 0.43, 1.49);
-  transition-property: width, border-radius;
-  z-index: 1;
-  position: relative;
+    outline: 0;
+    width: 100%;
+    background: #fff;
+    padding: 0 1.6rem;
+    border-radius: 0.7rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all 0.3s cubic-bezier(0, 0, 0.43, 1.49);
+    transition-property: width, border-radius;
+    z-index: 1;
+    position: relative;
 }
 
 .buttonMe {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 6rem;
-  font-weight: bold;
-  background: #57bd84;
-  border-radius: 0 0.7rem 0.7rem 0;
-  cursor:pointer;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6rem;
+    font-weight: bold;
+    background: #57bd84;
+    border-radius: 0 0.7rem 0.7rem 0;
+    cursor: pointer;
 }
 
 input:not(:placeholder-shown) {
-  border-radius: 0.7rem 0 0 0.7rem;
-  width: calc(100% - 6rem);
+    border-radius: 0.7rem 0 0 0.7rem;
+    width: calc(100% - 6rem);
 }
 
-input:not(:placeholder-shown) + button {
-  display: block;
+input:not(:placeholder-shown)+button {
+    display: block;
 }
 
-.search{
-  display: flex;
-  justify-content: space-evenly;
-  margin: 1rem;
-  align-items: center;
+.search {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem;
+    align-items: center;
 }
-.btnMeAdd{
-  height: fit-content !important;
+
+.btnMeAdd {
+    height: fit-content !important;
 }
-.formEditDiv{
-  display: none;
-  z-index: 1000;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  background-color: #d5d0c8;
-  padding: 0 36%;
-  padding-top: 1.5rem;
-  top: 7rem;
+
+.formEditDiv {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background-color: #d5d0c8;
+    padding: 0 36%;
+    padding-top: 1.5rem;
+    top: 7rem;
 }
-.btnActionUser{
-  cursor: default;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-direction: row;
+
+.btnActionUser {
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: row;
 }
-.btnActionUser i{
-  cursor: pointer;
-  color: white;
-  display: flex;
-  justify-content: center;
-  padding: 1rem 1rem;
-  align-items: center;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 100%;
-  font-size: larger;
+
+.btnActionUser i {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    font-size: larger;
 }
+
 .btnActionUser i:nth-child(1) {
-  background-color: #4CAF50;
+    background-color: #4CAF50;
 }
 
 .btnActionUser i:nth-child(2) {
-  background-color: #ff2323;
+    background-color: #ff2323;
+}
+
+.cardsProduct {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 90%;
+}
+
+.MisEnForm2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cardMe {
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
