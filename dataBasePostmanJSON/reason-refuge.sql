@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 15 mai 2023 à 15:49
+-- Généré le : jeu. 18 mai 2023 à 13:55
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -96,11 +96,18 @@ CREATE TABLE `utilisateur` (
   `id_user` int(11) NOT NULL,
   `nom_user` varchar(255) NOT NULL,
   `prenom_user` varchar(255) NOT NULL,
-  `adresse_usre` text NOT NULL,
+  `adresse_user` text NOT NULL,
   `email_user` varchar(255) NOT NULL,
   `password_user` varchar(255) NOT NULL,
   `role_user` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = user | 1 = admin | 2 = fournisseur'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id_user`, `nom_user`, `prenom_user`, `adresse_user`, `email_user`, `password_user`, `role_user`) VALUES
+(1, 'bouchettoy', 'marouane', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'uanemaro216@gmail.com', '$2y$10$npBmf4qkDA1YQAbBBCAQD.WPR.mW45WJteIhtriTG7XWKhScmntAi', 0);
 
 --
 -- Index pour les tables déchargées
@@ -156,7 +163,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
