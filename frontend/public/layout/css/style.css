@@ -95,15 +95,15 @@ input[type="submit"]:hover {
   border: 1px solid #ddd !important;
 }
 
-form {
+.formMe {
   position: relative;
   width: 30rem;
   background: #57bd84;
   border-radius: 0.7rem;
 }
 
-input,
-button {
+.inputMe,
+.buttonMe {
   height: 5rem;
   font-family: 'Lato', sans-serif;
   border: 0;
@@ -112,7 +112,7 @@ button {
   height: 9vh;
 }
 
-input[type="search"] {
+.inputMe {
   outline: 0;
   width: 100%;
   background: #fff;
@@ -127,7 +127,7 @@ input[type="search"] {
   position: relative;
 }
 
-button {
+.buttonMe {
   display: none;
   position: absolute;
   top: 0;

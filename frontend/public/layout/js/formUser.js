@@ -9,12 +9,12 @@ function generateCode() {
   return code;
 }
 
-if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER == 3 || ROLE_USER == 2 || ROLE_USER == 0)) {
+if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER == 3 || ROLE_USER == 1 || ROLE_USER == 2)) {
   var changeForm = document.getElementById("changeForm");
   function ForgotPassword() {
     var newForm = `<div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Forgot Password Admin</h3>
+                                    <h3 class="mb-4">Forgot Password User</h3>
                                 </div>
                                 <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
@@ -80,7 +80,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                 alert("check your inbox or spam in your gmail");
                 var newForm2 = `<div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Forgot Password Admin</h3>
+                                    <h3 class="mb-4">Forgot Password User</h3>
                                 </div>
                                 <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
@@ -119,7 +119,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
 
                     var newForm3 = `<div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Forgot Password Admin</h3>
+                                    <h3 class="mb-4">Forgot Password User</h3>
                                 </div>
                                 <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
@@ -263,7 +263,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
   function SignUp() {
     var newForm = `<div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Sign UP Admin</h3>
+                                    <h3 class="mb-4">Sign UP User</h3>
                                 </div>
                                 <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
@@ -298,12 +298,12 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                                     <input type="password" class="form-control" placeholder="Password" required name = "password">
                                     <span id="password_error" style = "color: red; cursor:default"></span>
                                 </div>
-                                <input type="hidden" name="role" value="1">
+                                <input type="hidden" name="role" value="0">
                                 <div class="form-group">
                                     <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
                                 </div>
                             </form>
-                            <p class="text-center">Admin? <span onclick="SignIn(password_error)">Sign In</span></p>`;
+                            <p class="text-center">User? <span onclick="SignIn(password_error)">Sign In</span></p>`;
     changeForm.innerHTML = newForm;
     var form = document.getElementById("form");
     var nom_error = document.getElementById("nom_error");
@@ -384,7 +384,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
           .then(res => res.json())
           .then(data => {
             if (data.message == "Account Added") {
-              location.replace(`${URLROOT}admin`);
+              location.replace(`${URLROOT}users`);
             } else {
               errorEmail = data.messageEmail;
               email_error.innerText = errorEmail;
@@ -396,7 +396,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
   function SignIn() {
     var newForm = `<div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Sign In Admin</h3>
+                                    <h3 class="mb-4">Sign In User</h3>
                                 </div>
                                 <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
@@ -417,7 +417,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                                     <span id="password_error" style = "color: red; cursor:default"></span>
                                     <span id="check_result"></span>
                                     </div>
-                                    <input type="hidden" name="role" value="1">
+                                    <input type="hidden" name="role" value="0">
                                     <div class="form-group">
                                     <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
                                     </div>
@@ -427,7 +427,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                                     </div>
                                 </div>
                             </form>
-                            <p class="text-center">Not a admin? <span onclick="SignUp()">Sign Up</span></p>`;
+                            <p class="text-center">Not a user? <span onclick="SignUp()">Sign Up</span></p>`;
     changeForm.innerHTML = newForm;
     var form = document.getElementById("form");
     var email_error = document.getElementById("email_error");
@@ -491,7 +491,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                 "style",
                 "color: green; cursor:default"
               );
-              location.replace(`${URLROOT}admin/dashboard`);
+              location.replace(`${URLROOT}User/dashboard`);
             } else {
               check_result.innerText = data.message;
               check_result.setAttribute("style", "color: red; cursor:default");
@@ -503,5 +503,5 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
   var clickMe = document.getElementById("click");
   clickMe.click();
 } else {
-  location.replace(`${URLROOT}admin/dashboard`);
+  location.replace(`${URLROOT}users/dashboard`);
 }
