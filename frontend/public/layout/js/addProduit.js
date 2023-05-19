@@ -15,11 +15,19 @@ if (
   const quantité_error = document.getElementById("quantité_error");
   const prix_error = document.getElementById("prix_error");
 
+  const changeQuantite = document.getElementById("changeQuantite");
+
   var errorNom = 0;
   var errorQuantité = 0;
   var errorPrix = 0;
 
   // 0 = No Error | 1 = Error
+
+  changeQuantite.addEventListener('input',()=>{
+    if(changeQuantite.value<1){
+      changeQuantite.value=1
+    }
+  })
 
   addProduit.addEventListener("submit", event => {
     event.preventDefault();
@@ -44,6 +52,7 @@ if (
       quantité_error.innerHTML = "Quantité Est Succès";
       quantité_error.classList = "error_success";
     }
+  
     if (data.prix == " ") {
       errorPrix = 1;
       prix_error.innerHTML = "Prix Ne Peut Pas Être Vide";

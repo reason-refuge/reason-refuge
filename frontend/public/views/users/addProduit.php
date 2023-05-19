@@ -10,7 +10,7 @@
         </div>
         <div class="divForm">
             <label for="quantité">Quantité</label>
-            <input type="number" name="quantité" placeholder="Quantité" required>
+            <input type="number" name="quantité" placeholder="Quantité" required id="changeQuantite">
             <span id="quantité_error"></span>
         </div>
         <div class="divForm">

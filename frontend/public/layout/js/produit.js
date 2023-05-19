@@ -31,7 +31,7 @@ if (
           ].nom_produit}</td>
                         <td id="quantité${data.result[i].id_produit}">${data
             .result[i].quantite_produit}</td>
-                        <td id="email${data.result[i].id_produit}">${data
+                        <td id="prix${data.result[i].id_produit}">${data
             .result[i].price_produit}DH</td>
                         <td>
                           <span class="btnActionUser">
@@ -72,7 +72,7 @@ if (
                         <td id="quantité${data.result[i].id_produit}">
                           ${data.result[i].quantite_produit}
                         </td>
-                        <td id="email${data.result[i].id_produit}">
+                        <td id="prix${data.result[i].id_produit}">
                           ${data.result[i].price_produit}DH
                         </td>
                         <td>
@@ -110,7 +110,7 @@ if (
                         <td id="quantité${data.result.id_produit}">
                           ${data.result.quantite_produit}
                         </td>
-                        <td id="email${data.result.id_produit}">
+                        <td id="prix${data.result.id_produit}">
                           ${data.result.price_produit}DH
                         </td>
                         <td>
@@ -151,12 +151,12 @@ if (
                           </div>
                           <div class="divForm">
                           <label for="quantité">Quantité</label>
-                              <input type="number" name="quantité" placeholder="Quantité" required value="${result.quantite_produit}">
+                              <input type="number" name="quantité" placeholder="Quantité" required id="changeQuantite" value="${result.quantite_produit}">
                               <span id="quantité_error"></span>
                           </div>
                           <div class="divForm">
                           <label for="prix">Prix</label>
-                          <input type="text" name="prix" placeholder="Prix" required value="${result.prix_user}">
+                          <input type="text" name="prix" placeholder="Prix" required value="${result.price_produit}">
                           <span id="prix_error"></span>
                           </div>
                           <div class="divForm">
@@ -177,6 +177,11 @@ if (
           var errorPrix = 0;
 
           // 0 = No Error | 1 = Error
+          changeQuantite.addEventListener('input',()=>{
+            if(changeQuantite.value<1){
+              changeQuantite.value=1
+            }
+          })
 
           editProduit.addEventListener("submit", event => {
             event.preventDefault();
@@ -234,7 +239,10 @@ if (
 
                     nom.innerText = newNom;
                     quantité.innerText = newQuantité;
-                    prix.innerText = newPrix;
+                    var newPrixDH=`${newPrix}DH`
+                    console.log(newPrixDH);
+                    console.log(prix);
+                    prix.innerText = newPrixDH;
                   }
                 });
             }
