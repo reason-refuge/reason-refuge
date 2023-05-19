@@ -5,13 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <span class="btn btn-info my-2" id="archive_desarchive">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                    archive
+                <span class="btn btn-info my-2" id="archive_desarchive" onclick="afficherLesArchives()">
+                    <i class="fa fa-eye" aria-hidden="true"></i> Afficher Les Factures Archivées
                 </span>
                 <div class="table-responsive" data-pattern="priority-columns">
-                    <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
+                    <table id="exportTable" summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Id Facture</th>
@@ -30,4 +28,5 @@
     </div>
 </div>
 <?php include_once './views/inc/footer.inc.php' ?>
+
 <script src=" <?= URLROOT ?>/layout/js/facture.js"></script>
