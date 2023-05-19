@@ -222,7 +222,6 @@ input:not(:placeholder-shown)+button {
 
 .cardMe {
     width: 15rem;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    text-align: center;
 }

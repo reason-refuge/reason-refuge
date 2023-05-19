@@ -5,6 +5,8 @@
     <div class='cardsProduct' id='cardsProduct'>
         
     </div>
+    <span id="noProduit"></span>
+    <div id="achatProduit" class="formEditDiv"></div>
 </div>
 <?php include_once './views/inc/footer.inc.php' ?>
-<script src=" <?=URLROOT?>/layout/js/achat.js"></script>
+<script src=" <?= URLROOT ?>/layout/js/achat.js"></script>

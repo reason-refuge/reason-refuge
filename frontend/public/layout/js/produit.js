@@ -33,14 +33,6 @@ if (
             .result[i].quantite_produit}</td>
                         <td id="prix${data.result[i].id_produit}">${data
             .result[i].price_produit}DH</td>
-                        <td>
-                          <span class="btnActionUser">
-                                  <i class ="fa fa-edit" onclick="editProduit(${data
-                                    .result[i].id_produit})"></i>
-                                  <i class ="fa fa-close" onclick="deleteProduit(${data
-                                    .result[i].id_produit})"></i>
-                          </span>
-                        </td>
                       </tr>`;
         }
         tbodyTrs.innerHTML = tr;
@@ -75,14 +67,6 @@ if (
                         <td id="prix${data.result[i].id_produit}">
                           ${data.result[i].price_produit}DH
                         </td>
-                        <td>
-                          <span class="btnActionUser">
-                                  <i class ="fa fa-edit" onclick="editProduit(${data
-                                    .result[i].id_produit})"></i>
-                                  <i class ="fa fa-close" onclick="deleteProduit(${data
-                                    .result[i].id_produit})"></i>
-                          </span>
-                        </td>
                       </tr>`;
             }
             tbodyTrs.innerHTML = tr;
@@ -113,14 +97,6 @@ if (
                         <td id="prix${data.result.id_produit}">
                           ${data.result.price_produit}DH
                         </td>
-                        <td>
-                          <span class="btnActionUser">
-                            <i class ="fa fa-edit" onclick="editProduit(${data
-                              .result.id_produit})"></i>
-                            <i class ="fa fa-close" onclick="deleteProduit(${data
-                              .result.id_produit})"></i>
-                          </span>
-                        </td>
                       </tr>`;
             tbodyTrs.innerHTML = tr;
             noProduit.innerText = "";
@@ -131,6 +107,47 @@ if (
         });
     }
   });
+
+  searchInput.addEventListener("input", () => {
+    var valueInput = searchInput.value;
+    fetch(`${BACK_URLROOT}Produits/SearchProduits/${valueInput}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        if (data.message == "Produits Issets") {
+          var tr = ``;
+          for (let i = 0; i < data.result.length; i++) {
+            tr += `<tr>
+                            <td>${data.result[i].id_produit}</td>
+                            <td>${data.result[i].nom_produit}</td>
+                            <td>${data.result[i].quantite_produit}</td>
+                            <td>${data.result[i].price_produit}DH</td>
+                            <td>
+                                <span class="btnActionUser">
+                                    <i class ="fa fa-edit" onclick="editProduit(${data
+                                      .result[i].id_produit})"></i>
+                                    <i class ="fa fa-close" onclick="deleteProduit(${data
+                                      .result[i].id_produit})"></i>
+                                </span>
+                            </td>
+                           </tr>`;
+          }
+          tbodyTrs.innerHTML = tr;
+          noProduit.innerText = "";
+        } else {
+          tbodyTrs.innerHTML = "";
+          noProduit.innerText = `Pas De Produit Avec ${valueInput}`;
+        }
+      });
+  });
+}
+/*
   function editProduit(id) {
     const formEditDiv = document.getElementById("formEditDiv");
     fetch(`${BACK_URLROOT}Produits/SearchProduitsById/${id}`, {
@@ -265,42 +282,4 @@ if (
         }
       });
   }
-  searchInput.addEventListener("input", () => {
-    var valueInput = searchInput.value;
-    fetch(`${BACK_URLROOT}Produits/SearchProduits/${valueInput}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(data => {
-        if (data.message == "Produits Issets") {
-          var tr = ``;
-          for (let i = 0; i < data.result.length; i++) {
-            tr += `<tr>
-                            <td>${data.result[i].id_produit}</td>
-                            <td>${data.result[i].nom_produit}</td>
-                            <td>${data.result[i].quantite_produit}</td>
-                            <td>${data.result[i].price_produit}DH</td>
-                            <td>
-                                <span class="btnActionUser">
-                                    <i class ="fa fa-edit" onclick="editProduit(${data
-                                      .result[i].id_produit})"></i>
-                                    <i class ="fa fa-close" onclick="deleteProduit(${data
-                                      .result[i].id_produit})"></i>
-                                </span>
-                            </td>
-                           </tr>`;
-          }
-          tbodyTrs.innerHTML = tr;
-          noProduit.innerText = "";
-        } else {
-          tbodyTrs.innerHTML = "";
-          noProduit.innerText = `Pas De Produit Avec ${valueInput}`;
-        }
-      });
-  });
-}
+*/

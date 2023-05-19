@@ -384,6 +384,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
           .then(res => res.json())
           .then(data => {
             if (data.message == "Account Added") {
+              alert("Votre Account a eté crier");
               location.replace(`${URLROOT}admin`);
             } else {
               errorEmail = data.messageEmail;
@@ -483,8 +484,10 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
             if (data.message == "Account Susses") {
               var result = data.result;
               var ID_USER_CHARGE = result.id_user;
+              var NOM_USER_CHARGE = result.nom_user;
               var ROLE_USER_CHARGE = result.role_user;
               localStorage.setItem("ID_USER", ID_USER_CHARGE);
+              localStorage.setItem("NOM_USER", NOM_USER_CHARGE);
               localStorage.setItem("ROLE_USER", ROLE_USER_CHARGE);
               check_result.innerText = data.message;
               check_result.setAttribute(
