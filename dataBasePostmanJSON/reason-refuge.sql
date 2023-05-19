@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 19 mai 2023 à 17:24
+-- Généré le : ven. 19 mai 2023 à 21:11
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -57,7 +57,8 @@ CREATE TABLE `facture` (
   `id_facture` int(11) NOT NULL,
   `date_facture` date NOT NULL DEFAULT current_timestamp(),
   `montantTotal_facture` float NOT NULL,
-  `id_acheteur` int(11) NOT NULL
+  `id_acheteur` int(11) NOT NULL,
+  `archive` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = non archiver | 1 = archiver'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -79,7 +80,7 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id_produit`, `nom_produit`, `quantite_produit`, `price_produit`, `id_fournisseur`) VALUES
-(1, 'riha fana', 283, 62, 1);
+(1, 'riha fana', 34219, 62, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +185,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `achat`
 --
 ALTER TABLE `achat`
-  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `alerte`
@@ -196,7 +197,7 @@ ALTER TABLE `alerte`
 -- AUTO_INCREMENT pour la table `facture`
 --
 ALTER TABLE `facture`
-  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
@@ -208,7 +209,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
