@@ -3,9 +3,8 @@
 <?php include_once './views/inc/navbarUser.inc.php' ?>
 <div class='MisEnForm MisEnForm2'>
     <div class='cardsProduct' id='cardsProduct'>
-        
+        <span id="noProduit"></span>
     </div>
-    <span id="noProduit"></span>
     <div id="achatProduit" class="formEditDiv"></div>
 </div>
 <?php include_once './views/inc/footer.inc.php' ?>

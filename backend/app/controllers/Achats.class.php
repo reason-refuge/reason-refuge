@@ -24,6 +24,7 @@ class Achats extends Controller
         $quantiteAchete = $data->quantiteAchete;
         $montantTotalAchat = $data->montantTotalAchat;
         $idProduit = $data->idProduit;
+        $roleVendeur = $data->roleVendeur;
 
 
         $check = $this->achatModel->checkIfProductIsset($idProduit, $id_acheteur, $id_vendeur);
@@ -32,7 +33,7 @@ class Achats extends Controller
         if ($check == 1) {
             if ($this->achatModel->add($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur)) {
                 if ($this->achatModel->changeQuantite($newQuantite, $idProduit)) {
-                    if ($this->achatModel->changeStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete)) {
+                    if ($this->achatModel->changeStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete,$roleVendeur)) {
                         if ($this->achatModel->addFacture($montantTotalAchat, $id_acheteur)) {
                             echo json_encode(
                                 array(
@@ -53,7 +54,7 @@ class Achats extends Controller
         if ($check == 0) {
             if ($this->achatModel->add($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur)) {
                 if ($this->achatModel->changeQuantite($newQuantite, $idProduit)) {
-                    if ($this->achatModel->addStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete)) {
+                    if ($this->achatModel->addStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete,$roleVendeur)) {
                         if ($this->achatModel->addFacture($montantTotalAchat, $id_acheteur)) {
                             echo json_encode(
                                 array(

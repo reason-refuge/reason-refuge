@@ -58,6 +58,48 @@ class Produits extends Controller
             );
         }
     }
+    public function GetProduitsForUser()
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $produit = $this->produitModel->getProduitsForUser();
+        if ($produit) {
+            echo json_encode(
+                array(
+                    'message' => 'Produits Issets',
+                    'result' => $produit
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'No Produit')
+            );
+        }
+    }
+    public function GetProduitsForFournisseur()
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $produit = $this->produitModel->getProduitsForFournisseur();
+        if ($produit) {
+            echo json_encode(
+                array(
+                    'message' => 'Produits Issets',
+                    'result' => $produit
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'No Produit')
+            );
+        }
+    }
     public function  SearchProduitsById($id){
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');

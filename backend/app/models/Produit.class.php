@@ -24,6 +24,18 @@ class Produit
         $row = $this->db->fetchAll();
         return $row;
     }
+    public function getProduitsForUser()
+    {
+        $this->db->query("SELECT * FROM produit WHERE quantite_produit > 0");
+        $row = $this->db->fetchAll();
+        return $row;
+    }
+    public function GetProduitsForFournisseur()
+    {
+        $this->db->query("SELECT * FROM stock WHERE quantite_stock > 0");
+        $row = $this->db->fetchAll();
+        return $row;
+    }
     public function getProduitById($id){
         $this->db->query("SELECT * FROM produit WHERE id_produit = :id AND quantite_produit > 0");
         $this->db->bind(':id', $id);
