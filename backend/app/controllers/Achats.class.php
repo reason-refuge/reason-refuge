@@ -73,4 +73,8 @@ class Achats extends Controller
             }
         }
     }
+    public function AddFournisseurUser()
+    {
+        
+    }
 }
