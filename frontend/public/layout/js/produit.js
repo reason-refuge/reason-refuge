@@ -124,19 +124,11 @@ if (
           var tr = ``;
           for (let i = 0; i < data.result.length; i++) {
             tr += `<tr>
-                            <td>${data.result[i].id_produit}</td>
-                            <td>${data.result[i].nom_produit}</td>
-                            <td>${data.result[i].quantite_produit}</td>
-                            <td>${data.result[i].price_produit}DH</td>
-                            <td>
-                                <span class="btnActionUser">
-                                    <i class ="fa fa-edit" onclick="editProduit(${data
-                                      .result[i].id_produit})"></i>
-                                    <i class ="fa fa-close" onclick="deleteProduit(${data
-                                      .result[i].id_produit})"></i>
-                                </span>
-                            </td>
-                           </tr>`;
+                      <td>${data.result[i].id_produit}</td>
+                      <td>${data.result[i].nom_produit}</td>
+                      <td>${data.result[i].quantite_produit}</td>
+                      <td>${data.result[i].price_produit}DH</td>
+                    </tr>`;
           }
           tbodyTrs.innerHTML = tr;
           noProduit.innerText = "";

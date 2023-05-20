@@ -5,9 +5,14 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <span class="btn btn-info my-2" id="archive_desarchive" onclick="afficherLesArchives()">
-                    <i class="fa fa-eye" aria-hidden="true"></i> Afficher Les Factures Archivées
-                </span>
+                <div class="search">
+                    <span class="btn btn-info my-2" id="archive_desarchive" onclick="afficherLesArchives()">
+                        <i class="fa fa-eye" aria-hidden="true"></i> Afficher Les Factures Archivées
+                    </span>
+                    <span class="btn btn-success my-2" id="archive_desarchive" onclick="exportFacture()">
+                        <i class="fa fa-download" aria-hidden="true"></i> Export Table
+                    </span>
+                </div>
                 <div class="table-responsive" data-pattern="priority-columns">
                     <table id="exportTable" summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
                         <thead>
