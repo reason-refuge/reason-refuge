@@ -15,6 +15,7 @@
                                 <th data-priority="3">Nom Produit</th>
                                 <th data-priority="4">Nom Et Prénom De Vendeur</th>
                                 <th data-priority="5">Quantitée Stock</th>
+                                <th data-priority="6">Supprimer</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyTrs"></tbody>

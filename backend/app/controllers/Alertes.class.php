@@ -34,6 +34,10 @@ class Alertes extends Controller
     {
         
     }
+    public function addAlerte()
+    {
+        
+    }
     public function deleteAlerte($id)
     {
         header('Access-Control-Allow-Origin: *');
@@ -53,9 +57,5 @@ class Alertes extends Controller
                 array('message' => 'Alerte Not Deleted')
             );
         }
-    }
-    public function addAlerte()
-    {
-        
     }
 }

@@ -29,4 +29,23 @@ class Stocks extends Controller
             );
         }
     }
+    public function Delete($id)
+    {
+        header('Access-Control-Allow-Origin:*');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        if ($this->stockModel->delete($id)) {
+            echo json_encode(
+                array(
+                    'message' => 'Produit Deleted'
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Produit Didn\'t Deleted')
+            );
+        }
+    }
 }

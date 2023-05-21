@@ -13,4 +13,14 @@ class Stock
         $row = $this->db->fetchAll();
         return $row;
     }
+    
+    public function delete($id)
+    {
+        $this->db->query("DELETE FROM stock WHERE id_stock = :id");
+        $this->db->bind(':id', $id);
+        if ($this->db->execute())
+            return true;
+        else
+            return false;
+    }
 }
