@@ -15,6 +15,13 @@ class Alerte
         $row = $this->db->fetchAll();
         return $row;
     }
+    public function getConditionAlerte()
+    {
+        $this->db->query("SELECT * FROM `condition_alerte`");
+        $row = $this->db->fetchAll();
+        return $row;
+        
+    }
     public function addConfigAlerte()
     {
         
