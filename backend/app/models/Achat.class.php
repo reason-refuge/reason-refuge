@@ -77,9 +77,12 @@ class Achat
         $montantTotalStock = $row-> quantite_stock;
         $newMontantTotalStock = $montantTotalStock + $montantTotalAchat;
 
-        $this->db->query('UPDATE `stock` SET `montantTotal_stock`=:newMontantTotalStock,`quantite_stock`=:newQuantiteStock WHERE `id_stock`=:id_stock');
+        $currentDateTime = date('Y-m-d');
+
+        $this->db->query('UPDATE `stock` SET `montantTotal_stock`=:newMontantTotalStock,`quantite_stock`=:newQuantiteStock,`date_stock` = :date_stock WHERE `id_stock`=:id_stock');
         $this->db->bind(':newQuantiteStock', $newQuantiteStock);
         $this->db->bind(':newMontantTotalStock', $newMontantTotalStock);
+        $this->db->bind(':date_stock', $currentDateTime);
         $this->db->bind(':id_stock', $id_stock);
         if ($this->db->execute()) {
             return true;
