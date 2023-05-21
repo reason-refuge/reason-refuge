@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 21 mai 2023 à 17:05
+-- Généré le : dim. 21 mai 2023 à 22:27
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -36,6 +36,23 @@ CREATE TABLE `achat` (
   `id_vendeur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `achat`
+--
+
+INSERT INTO `achat` (`id_achat`, `date_achat`, `montantTotal_achat`, `id_produit`, `id_acheteur`, `id_vendeur`) VALUES
+(1, '2023-05-21', 248, 1, 2, 1),
+(2, '2023-05-21', 248, 1, 2, 1),
+(3, '2023-05-21', 372, 1, 2, 1),
+(4, '2023-05-21', 62, 1, 2, 1),
+(5, '2023-05-21', 62, 1, 2, 1),
+(6, '2023-05-21', 62, 1, 2, 1),
+(7, '2023-05-21', 62, 1, 2, 1),
+(8, '2023-05-21', 62, 1, 2, 1),
+(9, '2023-05-21', 62, 1, 2, 1),
+(10, '2023-05-21', 62, 1, 2, 1),
+(11, '2023-05-21', 62, 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -45,8 +62,7 @@ CREATE TABLE `achat` (
 CREATE TABLE `alerte` (
   `id_alerte` int(11) NOT NULL,
   `date_alerte` date NOT NULL DEFAULT current_timestamp(),
-  `id_alerte_config` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_alerte_config` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,10 +73,10 @@ CREATE TABLE `alerte` (
 
 CREATE TABLE `alerte_config` (
   `id_alerte_config` int(11) NOT NULL,
-  `condition_alerte` text NOT NULL,
-  `value_condition_alerte` int(11) NOT NULL,
+  `id_condition_alerte` int(11) NOT NULL,
+  `value_condition_alerte` text NOT NULL,
   `message_alerte` text NOT NULL,
-  `id_type_alerte` int(11) NOT NULL
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -86,6 +102,28 @@ INSERT INTO `alerte_type` (`id_type_alerte`, `type_alerte`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `condition_alerte`
+--
+
+CREATE TABLE `condition_alerte` (
+  `id_condition_alerte` int(11) NOT NULL,
+  `condition_alerte` varchar(255) NOT NULL,
+  `value_condition_alerte_ou_non` tinyint(4) NOT NULL COMMENT '0 = non value | 1 = avec value',
+  `id_type_alerte` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `condition_alerte`
+--
+
+INSERT INTO `condition_alerte` (`id_condition_alerte`, `condition_alerte`, `value_condition_alerte_ou_non`, `id_type_alerte`) VALUES
+(1, 'Achat', 0, 1),
+(2, 'Supprimer Produit', 0, 3),
+(3, 'Nombre de Produit dans le stock inferieur de', 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `facture`
 --
 
@@ -96,6 +134,23 @@ CREATE TABLE `facture` (
   `id_acheteur` int(11) NOT NULL,
   `archive` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = non archiver | 1 = archiver'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `facture`
+--
+
+INSERT INTO `facture` (`id_facture`, `date_facture`, `montantTotal_facture`, `id_acheteur`, `archive`) VALUES
+(1, '2023-05-21', 248, 2, 0),
+(2, '2023-05-21', 248, 2, 0),
+(3, '2023-05-21', 372, 2, 0),
+(4, '2023-05-21', 62, 2, 0),
+(5, '2023-05-21', 62, 2, 0),
+(6, '2023-05-21', 62, 2, 0),
+(7, '2023-05-21', 62, 2, 0),
+(8, '2023-05-21', 62, 2, 0),
+(9, '2023-05-21', 62, 2, 0),
+(10, '2023-05-21', 62, 2, 0),
+(11, '2023-05-21', 62, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +171,7 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id_produit`, `nom_produit`, `quantite_produit`, `price_produit`, `id_fournisseur`) VALUES
-(1, 'riha fana', 4, 62, 1);
+(1, 'riha fana', 546435447, 62, 1);
 
 -- --------------------------------------------------------
 
@@ -134,6 +189,13 @@ CREATE TABLE `stock` (
   `role_vendeur` tinyint(4) NOT NULL,
   `quantite_stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `stock`
+--
+
+INSERT INTO `stock` (`id_stock`, `date_stock`, `montantTotal_stock`, `id_produit`, `id_acheteur`, `id_vendeur`, `role_vendeur`, `quantite_stock`) VALUES
+(1, '2023-05-21', 83, 1, 2, 1, 0, 22);
 
 -- --------------------------------------------------------
 
@@ -178,21 +240,28 @@ ALTER TABLE `achat`
 --
 ALTER TABLE `alerte`
   ADD PRIMARY KEY (`id_alerte`),
-  ADD KEY `id_alerte_config` (`id_alerte_config`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_alerte_config` (`id_alerte_config`);
 
 --
 -- Index pour la table `alerte_config`
 --
 ALTER TABLE `alerte_config`
   ADD PRIMARY KEY (`id_alerte_config`),
-  ADD KEY `id_type_alerte` (`id_type_alerte`);
+  ADD KEY `id_condition_alerte` (`id_condition_alerte`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Index pour la table `alerte_type`
 --
 ALTER TABLE `alerte_type`
   ADD PRIMARY KEY (`id_type_alerte`);
+
+--
+-- Index pour la table `condition_alerte`
+--
+ALTER TABLE `condition_alerte`
+  ADD PRIMARY KEY (`id_condition_alerte`),
+  ADD KEY `id_type_alerte` (`id_type_alerte`);
 
 --
 -- Index pour la table `facture`
@@ -231,7 +300,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `achat`
 --
 ALTER TABLE `achat`
-  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `alerte`
@@ -252,10 +321,16 @@ ALTER TABLE `alerte_type`
   MODIFY `id_type_alerte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT pour la table `condition_alerte`
+--
+ALTER TABLE `condition_alerte`
+  MODIFY `id_condition_alerte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `facture`
 --
 ALTER TABLE `facture`
-  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
@@ -267,7 +342,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
@@ -291,13 +366,19 @@ ALTER TABLE `achat`
 -- Contraintes pour la table `alerte`
 --
 ALTER TABLE `alerte`
-  ADD CONSTRAINT `id_alerte_config` FOREIGN KEY (`id_alerte_config`) REFERENCES `alerte_config` (`id_alerte_config`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `id_alerte_config` FOREIGN KEY (`id_alerte_config`) REFERENCES `alerte_config` (`id_alerte_config`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `alerte_config`
 --
 ALTER TABLE `alerte_config`
+  ADD CONSTRAINT `id_condition_alerte` FOREIGN KEY (`id_condition_alerte`) REFERENCES `condition_alerte` (`id_condition_alerte`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `condition_alerte`
+--
+ALTER TABLE `condition_alerte`
   ADD CONSTRAINT `id_type_alerte` FOREIGN KEY (`id_type_alerte`) REFERENCES `alerte_type` (`id_type_alerte`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

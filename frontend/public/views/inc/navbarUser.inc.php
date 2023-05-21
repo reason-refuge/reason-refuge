@@ -28,20 +28,30 @@
 		<!-- END nav -->
 	</div>
 	<saidBar id='saidBar'>
-		<div class="alert alert-danger" role="alert">
-			A simple danger alert—check it out!
+		<div class="alert alert-danger AlertMe" role="alert">
+			<dateMe>2023-04-29</dateMe>
+			<span>A simple danger alert—check it out!</span>
+			<i class = "fa fa-close"></i>
 		</div>
-		<div class="alert alert-warning" role="alert">
-			A simple warning alert—check it out!
+		<div class="alert alert-warning AlertMe" role="alert">
+			<dateMe>2023-04-29</dateMe>
+			<span>A simple warning alert—check it out!</span>
+			<i class = "fa fa-close"></i>
 		</div>
-		<div class="alert alert-info" role="alert">
-			A simple info alert—check it out!
+		<div class="alert alert-info AlertMe" role="alert">
+			<dateMe>2023-04-29</dateMe>
+			<span>A simple info alert—check it out!</span>
+			<i class = "fa fa-close"></i>
 		</div>
-		<div class="alert alert-light" role="alert">
-			A simple light alert—check it out!
+		<div class="alert alert-light AlertMe" role="alert">
+			<dateMe>2023-04-29</dateMe>
+			<span>A simple light alert—check it out!</span>
+			<i class = "fa fa-close"></i>
 		</div>
-		<div class="alert alert-dark" role="alert">
-			A simple dark alert—check it out!
+		<div class="alert alert-dark AlertMe" role="alert">
+			<dateMe>2023-04-29</dateMe>
+			<span>A simple dark alert—check it out!</span>
+			<i class = "fa fa-close"></i>
 		</div>
 		Alerts
 	</saidBar>

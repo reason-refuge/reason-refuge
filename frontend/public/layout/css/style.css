@@ -247,3 +247,16 @@ saidBar{
 .bottomMe {
     transform: translateY(42rem);
 }
+.AlertMe {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.AlertMe i{
+    cursor: pointer;
+    color: red;
+}
+.AlertMe dateMe{
+    color: green;
+}
