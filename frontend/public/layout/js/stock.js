@@ -28,7 +28,7 @@ if (
                     <td>${data.result[i].date_stock}</td>
                     <td>${data.result[i].montantTotal_stock}DH</td>
                     <td>${data.result[i].nom_produit}</td>
-                    <td>${data.result[i].nom_user}${data.result[i].prenom_user}</td>
+                    <td>${data.result[i].nom_user} ${data.result[i].prenom_user}</td>
                     <td>${data.result[i].quantite_stock}</td>
                   </tr>`;
         }

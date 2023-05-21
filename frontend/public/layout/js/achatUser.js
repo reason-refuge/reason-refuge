@@ -132,7 +132,7 @@ if (
                 .then(res => res.json())
                 .then(data => {
                   setTimeout(function() {
-                    location.reload();
+                    location.replace(`${URLROOT}users/factures`);
                   }, 1000);
                 });
             }
