@@ -8742,30 +8742,30 @@ h5,
   outline: none !important;
 }
 
-.social-media p a {
+.social-media p a, .social-media p sMe {
   border: 1px solid #e6e6e6;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 4px;
 }
-.social-media p a span {
+.social-media p a span , .social-media p sMe span {
   color: #4d4d4d;
 }
-.social-media p a:hover {
+.social-media p a:hover, .social-media p sMe:hover {
   background: #fc7fb2;
   border-color: #fc7fb2;
 }
-.social-media p a:hover span {
+.social-media p a:hover span, .social-media p sMe:hover span {
   color: #fff;
 }
 @media (max-width: 991.98px) {
-  .social-media p a {
+  .social-media p a, .social-media p sMe {
     border-color: #fff;
     width: 30px;
     height: 30px;
   }
-  .social-media p a span {
+  .social-media p a span , .social-media p sMe span {
     color: #fff;
   }
 }.form-control {
@@ -17512,30 +17512,30 @@ h5,
   outline: none !important;
 }
 
-.social-media p a {
+.social-media p a, .social-media p sMe {
   border: 1px solid #e6e6e6;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 4px;
 }
-.social-media p a span {
+.social-media p a span , .social-media p sMe span {
   color: #4d4d4d;
 }
-.social-media p a:hover {
+.social-media p a:hover, .social-media p sMe:hover {
   background: #fc7fb2;
   border-color: #fc7fb2;
 }
-.social-media p a:hover span {
+.social-media p a:hover span, .social-media p sMe:hover span {
   color: #fff;
 }
 @media (max-width: 991.98px) {
-  .social-media p a {
+  .social-media p a, .social-media p sMe {
     border-color: #fff;
     width: 30px;
     height: 30px;
   }
-  .social-media p a span {
+  .social-media p a span , .social-media p sMe span {
     color: #fff;
   }
 }
@@ -17546,5 +17546,10 @@ h5,
   position: fixed !important;
   top: 0 !important;
   width: 100% !important;
-  z-index: 10000 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+sMe{
+  cursor:pointer;
 }

@@ -1,5 +1,5 @@
 <section class="ftco-section fixNav">
-		<div>
+		<div style="width: 100% !important;z-index: 10000 !important;">
 			<nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
 		    <div class="container-fluid">
 		    	<a class="navbar-brand" href="<?=URLROOT?>admin/dashboard"><img class="logoNav" src="<?= URLROOT ?>layout/image/logo-reason-rufuge.png" alt="logo"></a>

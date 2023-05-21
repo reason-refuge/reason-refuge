@@ -1,5 +1,5 @@
 <?php include_once './views/inc/header.inc.php' ?>
-<input type="hidden" value="Alertes" id="activeLi">
+<input type="hidden" value="Alertes Controle" id="activeLi">
 <?php include_once './views/inc/navbarUser.inc.php' ?>
 <div class="MisEnForm">
     

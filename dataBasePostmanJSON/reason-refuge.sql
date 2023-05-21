@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 19 mai 2023 à 21:11
+-- Généré le : dim. 21 mai 2023 à 17:05
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -44,8 +44,44 @@ CREATE TABLE `achat` (
 
 CREATE TABLE `alerte` (
   `id_alerte` int(11) NOT NULL,
-  `date_alerte` date NOT NULL DEFAULT current_timestamp()
+  `date_alerte` date NOT NULL DEFAULT current_timestamp(),
+  `id_alerte_config` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alerte_config`
+--
+
+CREATE TABLE `alerte_config` (
+  `id_alerte_config` int(11) NOT NULL,
+  `condition_alerte` text NOT NULL,
+  `value_condition_alerte` int(11) NOT NULL,
+  `message_alerte` text NOT NULL,
+  `id_type_alerte` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alerte_type`
+--
+
+CREATE TABLE `alerte_type` (
+  `id_type_alerte` int(11) NOT NULL,
+  `type_alerte` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `alerte_type`
+--
+
+INSERT INTO `alerte_type` (`id_type_alerte`, `type_alerte`) VALUES
+(1, 'success'),
+(2, 'warning'),
+(3, 'danger');
 
 -- --------------------------------------------------------
 
@@ -70,7 +106,7 @@ CREATE TABLE `facture` (
 CREATE TABLE `produit` (
   `id_produit` int(11) NOT NULL,
   `nom_produit` varchar(255) NOT NULL,
-  `quantite_produit` int(11) NOT NULL,
+  `quantite_produit` int(255) NOT NULL,
   `price_produit` float NOT NULL,
   `id_fournisseur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -80,7 +116,7 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id_produit`, `nom_produit`, `quantite_produit`, `price_produit`, `id_fournisseur`) VALUES
-(1, 'riha fana', 34219, 62, 1);
+(1, 'riha fana', 4, 62, 1);
 
 -- --------------------------------------------------------
 
@@ -95,6 +131,7 @@ CREATE TABLE `stock` (
   `id_produit` int(11) NOT NULL,
   `id_acheteur` int(11) NOT NULL,
   `id_vendeur` int(11) NOT NULL,
+  `role_vendeur` tinyint(4) NOT NULL,
   `quantite_stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -119,15 +156,9 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id_user`, `nom_user`, `prenom_user`, `adresse_user`, `email_user`, `password_user`, `role_user`) VALUES
-(1, 'fournisseurEZR324T', 'fournisseur', 'fournisseur adresse', 'fournisseur@gmail.com', '$2y$10$vFqZha/8U4YBOiHQ9auBSuNH6qpMqM9atpIardznCGF0HKKrnA1xi', 2),
-(2, 'bouchettoy', 'marouane', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'user@gmail.com', '$2y$10$MZDlDFELIt0nqAiFb6.aKOrcnzYLU/3vjUoneCwjwAI0EVrpPZ3sO', 0),
-(3, 'admin', 'admin', 'admin adresse', 'admin@gmail.com', '$2y$10$vFqZha/8U4YBOiHQ9auBSuNH6qpMqM9atpIardznCGF0HKKrnA1xi', 1),
-(4, 'admin', 'admin', 'admin adresse', 'uanemaro216@gmail.com', '$2y$10$GOagqMNLJ2kdTKmX3UTXK./MOcneY2lg.GLin1icXKRPrdA21bzHe', 1),
-(5, 'bouchettoy', 'marouane', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'uanemaro89@gmail.com', '$2y$10$TXuJNarQcXRldP3EQfGu7uSE3FHn1a8QQ69z6DJp2rQ5qlVkyN8DC', 1),
-(6, 'bouchettoy', 'marouane', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'uanemaro350@gmail.com', '$2y$10$f68V6CujTg3.HKX.zZwmXO.T85MWj9iW0dWNVn6THqBd2ga./XEp.', 1),
-(14, 'bouchettoy', 'marouane', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'uanemaro21fdgdrz6@gmail.com', '$2y$10$b5ZDvgw57PUGIp.2qnC.1u1uvRuAntMJrHVbU0EvC39ruk688IaqS', 0),
-(15, 'bouchettoy', 'marouane', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'uanemaro2DSFGSREGDS16@gmail.com', '$2y$10$.nd8doHeBDGJVm1ptr05TeLxAi.CFybF2rdEhU2MLDiMB99Etma9O', 1),
-(16, 'bouchettoyfdhgfdg', 'fdg', 'Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27', 'uanemaro21fdgsfdg6@gmail.com', '$2y$10$MZDlDFELIt0nqAiFb6.aKOrcnzYLU/3vjUoneCwjwAI0EVrpPZ3sO', 0);
+(1, 'fournisseur', 'fournisseur', 'fournisseur adresse', 'fournisseur@gmail.com', '$2y$10$vFqZha/8U4YBOiHQ9auBSuNH6qpMqM9atpIardznCGF0HKKrnA1xi', 2),
+(2, 'user', 'user', 'user adress', 'user@gmail.com', '$2y$10$MZDlDFELIt0nqAiFb6.aKOrcnzYLU/3vjUoneCwjwAI0EVrpPZ3sO', 0),
+(3, 'admin', 'admin', 'admin adresse', 'admin@gmail.com', '$2y$10$vFqZha/8U4YBOiHQ9auBSuNH6qpMqM9atpIardznCGF0HKKrnA1xi', 1);
 
 --
 -- Index pour les tables déchargées
@@ -146,7 +177,22 @@ ALTER TABLE `achat`
 -- Index pour la table `alerte`
 --
 ALTER TABLE `alerte`
-  ADD PRIMARY KEY (`id_alerte`);
+  ADD PRIMARY KEY (`id_alerte`),
+  ADD KEY `id_alerte_config` (`id_alerte_config`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Index pour la table `alerte_config`
+--
+ALTER TABLE `alerte_config`
+  ADD PRIMARY KEY (`id_alerte_config`),
+  ADD KEY `id_type_alerte` (`id_type_alerte`);
+
+--
+-- Index pour la table `alerte_type`
+--
+ALTER TABLE `alerte_type`
+  ADD PRIMARY KEY (`id_type_alerte`);
 
 --
 -- Index pour la table `facture`
@@ -185,7 +231,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `achat`
 --
 ALTER TABLE `achat`
-  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `alerte`
@@ -194,10 +240,22 @@ ALTER TABLE `alerte`
   MODIFY `id_alerte` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `alerte_config`
+--
+ALTER TABLE `alerte_config`
+  MODIFY `id_alerte_config` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `alerte_type`
+--
+ALTER TABLE `alerte_type`
+  MODIFY `id_type_alerte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `facture`
 --
 ALTER TABLE `facture`
-  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
@@ -209,7 +267,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
@@ -228,6 +286,19 @@ ALTER TABLE `achat`
   ADD CONSTRAINT `produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id_produit`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_acheteur` FOREIGN KEY (`id_acheteur`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_vendeur` FOREIGN KEY (`id_vendeur`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `alerte`
+--
+ALTER TABLE `alerte`
+  ADD CONSTRAINT `id_alerte_config` FOREIGN KEY (`id_alerte_config`) REFERENCES `alerte_config` (`id_alerte_config`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `alerte_config`
+--
+ALTER TABLE `alerte_config`
+  ADD CONSTRAINT `id_type_alerte` FOREIGN KEY (`id_type_alerte`) REFERENCES `alerte_type` (`id_type_alerte`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `facture`

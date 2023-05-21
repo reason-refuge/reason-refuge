@@ -225,3 +225,25 @@ input:not(:placeholder-shown)+button {
     align-items: center;
     text-align: center;
 }
+
+/* saidBar */
+saidBar{
+    background-color: #f7f7f7;
+    width: 20rem;
+    max-height: 40rem;
+    box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.34);
+    overflow: auto;
+    transition: transform 0.3s ease;
+    display: block;
+    z-index: 9999;
+    margin-top: -42rem;
+    text-align: center;
+    padding: 10px;
+}
+.topMe {
+    transform: translateY(0px);
+}
+
+.bottomMe {
+    transform: translateY(42rem);
+}
