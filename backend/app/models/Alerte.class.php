@@ -56,4 +56,18 @@ class Alerte
         else
             return false;
     }
+    public function getIdsAlerteConfig($id_condition_alerte,$id_user){
+        $this->db->query("SELECT * FROM `alerte_config` WHERE `id_user` = :id_user AND `id_condition_alerte` = :id_condition_alerte");
+        $this->db->bind(':id_condition_alerte', $id_condition_alerte);
+        $this->db->bind(':id_user', $id_user);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
+    public function getProductInStockByIdUser($id_user)
+    {
+        $this->db->query("SELECT * FROM `stock`WHERE `id_acheteur` = :id_user");
+        $this->db->bind(':id_user', $id_user);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
 }
