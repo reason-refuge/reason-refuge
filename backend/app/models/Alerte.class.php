@@ -30,9 +30,13 @@ class Alerte
         return $row;
         
     }
-    public function addConfigAlerte()
+    public function addConfigAlerte($sql)
     {
-        
+        $this->db->query($sql);
+        if ($this->db->execute())
+            return true;
+        else
+            return false;
     }
     public function deleteAlerte($id)
     {

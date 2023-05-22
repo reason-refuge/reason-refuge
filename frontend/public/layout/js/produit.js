@@ -1,4 +1,3 @@
-const ID_USER = localStorage.getItem("ID_USER");
 const ROLE_USER = localStorage.getItem("ROLE_USER");
 
 if (

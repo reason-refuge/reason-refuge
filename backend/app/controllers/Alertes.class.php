@@ -32,7 +32,34 @@ class Alertes extends Controller
     }
     public function addConfigAlerte()
     {
+        header('Access-Control-Allow-Origin:*');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: PUT');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $data = json_decode(file_get_contents("php://input"));
+
+        $conditionAlert = $data->conditionAlert;
+        $messageAlert = $data->messageAlert;
+        $id_user = $data->id_user;
         
+        $sql = "INSERT INTO `alerte_config`(`id_condition_alerte`, `message_alerte`, `id_user`) VALUES ('$conditionAlert','$messageAlert','$id_user')";
+        if (isset($data->valueLimitCondition) ) {
+            $valueLimitCondition = $data->valueLimitCondition;
+            $sql = "INSERT INTO `alerte_config`(`id_condition_alerte`, `message_alerte`, `id_user`, `value_condition_alerte`) VALUES ('$conditionAlert','$messageAlert','$id_user','$valueLimitCondition')";
+        }
+        $result = $this->alerteModel->addConfigAlerte($sql);
+        if ($result) {
+            echo json_encode(
+                array(
+                    'message' => 'Condition Added',
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Condition Not Added')
+            );
+        }
     }
     public function addAlerte()
     {

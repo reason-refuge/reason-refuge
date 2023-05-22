@@ -1,4 +1,3 @@
-const ID_USER = localStorage.getItem("ID_USER");
 const ROLE_USER = localStorage.getItem("ROLE_USER");
 
 if (
@@ -32,7 +31,7 @@ if (
                     <td>${data.result[i].quantite_stock}</td>
                     <td>
                       <span class="btnActionUser">
-                        <i class ="fa fa-close" onclick="deleteProduit(${data.result[i].id_stock})"></i>
+                        <i style="background-color: red;" class ="fa fa-close" onclick="deleteProduit(${data.result[i].id_stock})"></i>
                       </span>
                     </td>
                   </tr>`;
