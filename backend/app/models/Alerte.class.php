@@ -22,6 +22,14 @@ class Alerte
         return $row;
         
     }
+    public function getConditionAlerteById($id)
+    {
+        $this->db->query("SELECT * FROM `condition_alerte` WHERE `id_condition_alerte`=:id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->fetch();
+        return $row;
+        
+    }
     public function addConfigAlerte()
     {
         

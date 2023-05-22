@@ -80,4 +80,26 @@ class Alertes extends Controller
         }
         
     }
+    public function getConditionAlerteById($id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+    
+        $condition = $this->alerteModel->getConditionAlerteById($id);
+        if ($condition) {
+            echo json_encode(
+                array(
+                    'message' => 'Condition Alerte Isset',
+                    'result' => $condition
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Condition Alerte Not Isset')
+            );
+        }
+        
+    }
 }
