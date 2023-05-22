@@ -47,8 +47,13 @@ class Alerte
         else
             return false;
     }
-    public function addAlerte()
+    public function addAlerte($id_alerte_config)
     {
-        
+        $this->db->query("INSERT INTO `alerte`(`id_alerte_config`) VALUES (:id_alerte_config)");
+        $this->db->bind(':id_alerte_config', $id_alerte_config);
+        if ($this->db->execute())
+            return true;
+        else
+            return false;
     }
 }

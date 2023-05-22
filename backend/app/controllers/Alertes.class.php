@@ -34,7 +34,7 @@ class Alertes extends Controller
     {
         header('Access-Control-Allow-Origin:*');
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Method: PUT');
+        header('Access-Control-Allow-Method: POST');
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
 
         $data = json_decode(file_get_contents("php://input"));
@@ -61,9 +61,25 @@ class Alertes extends Controller
             );
         }
     }
-    public function addAlerte()
+    public function addAlerte($id_alerte_config)
     {
-        
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $result = $this->alerteModel->addAlerte($id_alerte_config);
+        if ($result) {
+            echo json_encode(
+                array(
+                    'message' => 'Alerte Added'
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Alerte Added')
+            );
+        }
     }
     public function deleteAlerte($id)
     {
