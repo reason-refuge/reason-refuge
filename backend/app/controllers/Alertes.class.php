@@ -157,18 +157,17 @@ class Alertes extends Controller
             $idAlerte = $IdsAlerteConfig[$i]->id_alerte_config;
             array_push($IdsAlerte,$idAlerte);
         }
-        var_dump($IdsAlerte);
-        // if ($IdsAlerteConfig) {
-        //     echo json_encode(
-        //         array(
-        //             'message' => 'Ids Alerte Config Isset',
-        //             'result' => $IdsAlerteConfig
-        //         )
-        //     );
-        // } else {
-        //     echo json_encode(
-        //         array('message' => 'Ids Alerte Config Not Isset')
-        //     );
-        // }
+        if ($IdsAlerte) {
+            echo json_encode(
+                array(
+                    'message' => 'Ids Alerte Config Isset',
+                    'result' => $IdsAlerte
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Ids Alerte Config Not Isset')
+            );
+        }
     }
 }

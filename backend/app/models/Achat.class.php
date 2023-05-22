@@ -10,7 +10,7 @@ class Achat
     }
     public function checkIfProductIsset($idProduit, $id_acheteur, $id_vendeur)
     {
-        $this->db->query('SELECT * FROM `achat` WHERE `id_produit` = :idProduit AND `id_acheteur` = :id_acheteur AND `id_vendeur` = :id_vendeur ORDER BY `id_achat` DESC LIMIT 1');
+        $this->db->query('SELECT * FROM `stock` WHERE `id_produit` = :idProduit AND `id_acheteur` = :id_acheteur AND `id_vendeur` = :id_vendeur');
         $this->db->bind(':idProduit', $idProduit);
         $this->db->bind(':id_acheteur', $id_acheteur);
         $this->db->bind(':id_vendeur', $id_vendeur);
@@ -74,7 +74,7 @@ class Achat
         $id_stock = $row-> id_stock;
         $quantiteStock = $row-> quantite_stock;
         $newQuantiteStock = $quantiteStock + $quantiteAchete;
-        $montantTotalStock = $row-> quantite_stock;
+        $montantTotalStock = $row-> montantTotal_stock;
         $newMontantTotalStock = $montantTotalStock + $montantTotalAchat;
 
         $currentDateTime = date('Y-m-d');

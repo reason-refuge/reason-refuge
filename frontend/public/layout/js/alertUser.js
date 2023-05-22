@@ -53,3 +53,35 @@ function deleteAlert(id) {
         }
       });
 }
+function addAlerteNonLierAuStock(id_alerte_config) {
+  fetch(
+    `${BACK_URLROOT}Alertes/getIdsAlerteConfig/${id_alerte_config}/${ID_USER}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  )
+    .then(res => res.json())
+    .then(data => {
+      if (data.message == "Ids Alerte Config Isset") {
+        var result = data.result;
+        for (let i = 0; i < result.length; i++) {
+          const ids = result[i];
+          fetch(
+            `${BACK_URLROOT}Alertes/addAlerte/${ids}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json"
+              }
+            }
+          )
+            .then(res => res.json())
+            .then(data => {console.log(data);
+            });
+        }
+      }
+    });
+}

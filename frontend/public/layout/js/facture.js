@@ -188,6 +188,7 @@ if (
       .then(data => {
         if (data.message == "Facture Deleted") {
             trId.style.display = "none";
+            addAlerteNonLierAuStock(7)
         }
       });
   }

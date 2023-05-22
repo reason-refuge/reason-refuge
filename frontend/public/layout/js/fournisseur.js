@@ -1,6 +1,11 @@
 const ROLE_USER = localStorage.getItem("ROLE_USER");
 
-if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER == 3 || ROLE_USER == 2 || ROLE_USER == 1)) {
+if (
+  !ID_USER ||
+  ID_USER === "null" ||
+  ID_USER === "undefined" ||
+  (ROLE_USER == 3 || ROLE_USER == 2 || ROLE_USER == 1)
+) {
   location.replace(`${URLROOT}users`);
 } else {
   const tbodyTrs = document.getElementById("tbodyTrs");
@@ -120,8 +125,10 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                         </td>
                         <td>
                           <span class="btnActionUser">
-                            <i class ="fa fa-edit" onclick="editFournisseur(${data.result.id_user})"></i>
-                            <i class ="fa fa-close" onclick="deleteFournisseur(${data.result.id_user})"></i>
+                            <i class ="fa fa-edit" onclick="editFournisseur(${data
+                              .result.id_user})"></i>
+                            <i class ="fa fa-close" onclick="deleteFournisseur(${data
+                              .result.id_user})"></i>
                           </span>
                         </td>
                       </tr>`;
@@ -238,6 +245,8 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                     nom.innerText = newNom;
                     prenom.innerText = newPrenom;
                     adresse.innerText = newAdresse;
+
+                    addAlerteNonLierAuStock(4)
                   }
                 });
             }
@@ -257,6 +266,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
         if (data.message == "Account Deleted") {
           const tr = document.getElementById(`tr${id}`);
           tr.style.display = "none";
+          addAlerteNonLierAuStock(5)
         }
       });
   }

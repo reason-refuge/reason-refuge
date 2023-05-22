@@ -10,7 +10,7 @@ class Alerte
     }
     public function getAlertesByUserId($id_user)
     {
-        $this->db->query("SELECT * FROM alerte al, alerte_config alc, alerte_type alt, condition_alerte ala WHERE al.id_alerte_config = alc.id_alerte_config AND alc.id_user = :id_user AND alc.id_condition_alerte = ala.id_condition_alerte AND ala.id_type_alerte = alt.id_type_alerte");
+        $this->db->query("SELECT * FROM alerte al, alerte_config alc, alerte_type alt, condition_alerte ala WHERE al.id_alerte_config = alc.id_alerte_config AND alc.id_user = :id_user AND alc.id_condition_alerte = ala.id_condition_alerte AND ala.id_type_alerte = alt.id_type_alerte ORDER BY al.id_alerte DESC");
         $this->db->bind(':id_user', $id_user);
         $row = $this->db->fetchAll();
         return $row;

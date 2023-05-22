@@ -130,6 +130,7 @@ if (
               })
                 .then(res => res.json())
                 .then(data => {
+                  addAlerteNonLierAuStock(1)
                   setTimeout(function() {
                     location.replace(`${URLROOT}users/factures`);
                   }, 1000);

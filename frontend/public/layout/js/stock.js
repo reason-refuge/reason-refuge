@@ -53,6 +53,7 @@ if (
           if (data.message == "Produit Deleted") {
             const tr = document.getElementById(`tr${id}`);
             tr.style.display = "none";
+            addAlerteNonLierAuStock(2)
           }
         });
     }
