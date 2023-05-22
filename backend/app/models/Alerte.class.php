@@ -63,6 +63,12 @@ class Alerte
         $row = $this->db->fetchAll();
         return $row;
     }
+    public function getValueConditionAlerte($id_user){
+        $this->db->query("SELECT * FROM `alerte_config` WHERE `id_user` = :id_user AND `id_condition_alerte` = 3");
+        $this->db->bind(':id_user', $id_user);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
     public function getProductInStockByIdUser($id_user)
     {
         $this->db->query("SELECT * FROM `stock`WHERE `id_acheteur` = :id_user");

@@ -48,4 +48,30 @@ class Stocks extends Controller
             );
         }
     }
+    public function getQuantiteForProduitsInStock($id_user)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $ProduitsInStock = $this->stockModel->getProduitsInStock($id_user);
+        $QuantitesForProduits = [];
+        for ($i=0; $i < count($ProduitsInStock); $i++) { 
+            $QuantiteForProduits = $ProduitsInStock[$i]->quantite_stock;
+            array_push($QuantitesForProduits,$QuantiteForProduits);
+        }
+        if ($QuantitesForProduits) {
+            echo json_encode(
+                array(
+                    'message' => 'Quantites For Produits Isset',
+                    'result' => $QuantitesForProduits
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Quantites For Produits Not Isset')
+            );
+        }
+    }
 }

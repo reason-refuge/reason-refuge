@@ -13,6 +13,13 @@ class Stock
         $row = $this->db->fetchAll();
         return $row;
     }
+    public function getProduitsInStock($id_user)
+    {
+        $this->db->query("SELECT * FROM `stock` WHERE `id_acheteur` = :id_user");
+        $this->db->bind(':id_user', $id_user);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
     
     public function delete($id)
     {

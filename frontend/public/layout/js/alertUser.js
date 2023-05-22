@@ -9,6 +9,7 @@ function cacherAlert() {
 }
 
 function afficherAlert() {
+  addAlerteLierAuStock();
   AlertId.setAttribute("onclick", "cacherAlert()");
   saidBar.setAttribute("class", "bottomMe");
 
@@ -21,16 +22,20 @@ function afficherAlert() {
     .then(res => res.json())
     .then(data => {
       if (data.message == "Alertes Issets") {
-        var result = data.result
+        var result = data.result;
         var alertes = ``;
         for (let i = 0; i < result.length; i++) {
-          alertes += `<div class="alert alert-${result[i].type_alerte} AlertMe" role="alert" id=divAlert${result[i].id_alerte}>
+          alertes += `<div class="alert alert-${result[i]
+            .type_alerte} AlertMe" role="alert" id=divAlert${result[i]
+            .id_alerte}>
                         <dateMe>${result[i].date_alerte}</dateMe>
                         <span>${result[i].message_alerte}</span>
-                        <i class = "fa fa-close" onclick = "deleteAlert(${result[i].id_alerte})"></i>
+                        <i class = "fa fa-close" onclick = "deleteAlert(${result[
+                          i
+                        ].id_alerte})"></i>
                     </div>`;
         }
-        alertes += 'Alerts'
+        alertes += "Alerts";
         saidBar.innerHTML = alertes;
       } else {
         saidBar.innerHTML = data.message;
@@ -38,20 +43,52 @@ function afficherAlert() {
     });
 }
 function deleteAlert(id) {
-    const divAlert = document.getElementById(`divAlert${id}`);
+  const divAlert = document.getElementById(`divAlert${id}`);
 
-    fetch(`${BACK_URLROOT}Alertes/deleteAlerte/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+  fetch(`${BACK_URLROOT}Alertes/deleteAlerte/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.message == "Alerte Deleted") {
+        divAlert.style.display = "none";
       }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message == "Alerte Deleted") {
-            divAlert.style.display = "none";
-        }
-      });
+    });
+}
+function addAlerteLierAuStock() {
+  fetch(`${BACK_URLROOT}Stocks/getQuantiteForProduitsInStock/${ID_USER}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.message == "Quantites For Produits Isset") {
+        var quantityInStock = data.result;
+        fetch(`${BACK_URLROOT}Alertes/getValueConditionAlerte/${ID_USER}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.message == "Value Condition Alerte Isset") {
+              var result = data.result;
+              for (let i = 0; i < result.length; i++) {
+                const quantity = result[i];
+                if (quantity > quantityInStock) {
+                  addAlerteNonLierAuStock(3);
+                }
+              }
+            }
+          });
+      }
+    });
 }
 function addAlerteNonLierAuStock(id_alerte_config) {
   fetch(
@@ -69,17 +106,15 @@ function addAlerteNonLierAuStock(id_alerte_config) {
         var result = data.result;
         for (let i = 0; i < result.length; i++) {
           const ids = result[i];
-          fetch(
-            `${BACK_URLROOT}Alertes/addAlerte/${ids}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json"
-              }
+          fetch(`${BACK_URLROOT}Alertes/addAlerte/${ids}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
             }
-          )
+          })
             .then(res => res.json())
-            .then(data => {console.log(data);
+            .then(data => {
+              console.log(data);
             });
         }
       }

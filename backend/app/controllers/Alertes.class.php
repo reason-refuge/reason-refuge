@@ -170,4 +170,30 @@ class Alertes extends Controller
             );
         }
     }
+    public function getValueConditionAlerte($id_user)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $ValuesConditionAlerte = $this->alerteModel->getValueConditionAlerte($id_user);
+        $ValueConditionAlerte = [];
+        for ($i=0; $i < count($ValuesConditionAlerte); $i++) { 
+            $ValueCondition = $ValuesConditionAlerte[$i]->value_condition_alerte;
+            array_push($ValueConditionAlerte,$ValueCondition);
+        }
+        if ($ValueConditionAlerte) {
+            echo json_encode(
+                array(
+                    'message' => 'Value Condition Alerte Isset',
+                    'result' => $ValueConditionAlerte
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Value Condition Alerte Not Isset')
+            );
+        }
+    }
 }
