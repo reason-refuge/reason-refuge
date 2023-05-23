@@ -1,0 +1,942 @@
+{
+	"info": {
+		"_postman_id": "b2fbd62b-dcdb-4568-b2f6-e98127eeb492",
+		"name": "Reason Refuge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21091777"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nom\": \"Fournissuer2\",\r\n  \"prenom\": \"Fournissuer2\",\r\n  \"adresse\": \"Fournissuer2 adresse\",\r\n  \"email\": \"Fournissuer2@gmail.com\",\r\n  \"password\": \"Marouane216@\",\r\n  \"role\": \"2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"Marouane216\",\r\n    \"role\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/users/GetUserByEmail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"users",
+								"GetUserByEmail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Marouane216\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/updatePassword/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"updatePassword",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"nom user\",\r\n    \"prenom\" : \"prenom user\",\r\n    \"adresse\" : \"adresse user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/UpdateUser/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"UpdateUser",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/TotalUsersAdminFournisseur/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"TotalUsersAdminFournisseur",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users Admin Fournisseur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/GetUsersAdminFournisseur/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"GetUsersAdminFournisseur",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users Admin Fournisseur By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/SearchUsersAdminFournisseurById/0/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"SearchUsersAdminFournisseurById",
+								"0",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users Admin Fournisseur By Libel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/SearchUsersAdminFournisseurByLibel/2/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"SearchUsersAdminFournisseurByLibel",
+								"2",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Users/Delete/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Users",
+								"Delete",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produits",
+			"item": [
+				{
+					"name": "AddProduit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_user\": \"1\",\r\n  \"nom\": \"riha\",\r\n  \"quantité\": \"123\",\r\n  \"prix\": \"132,523\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/AddProduit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"AddProduit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Produit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"nom produit\",\r\n    \"quantité\" : \"536\",\r\n    \"prix\" : \"53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/UpdateProduit/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"UpdateProduit",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Produits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/GetProduits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"GetProduits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Produits For Fournisseur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/GetProduitsForFournisseur",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"GetProduitsForFournisseur"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Produits For User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/GetProduitsForUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"GetProduitsForUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Produits By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/SearchProduitsById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"SearchProduitsById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Produits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/SearchProduits/riha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"SearchProduits",
+								"riha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Produits/Delete/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Produits",
+								"Delete",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Achats",
+			"item": [
+				{
+					"name": "Add User Fournisseur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newQuantite\": 5,\r\n    \"id_vendeur\": 1,\r\n    \"roleVendeur\": 2,\r\n    \"id_acheteur\": 2,\r\n    \"quantiteAchete\": 3,\r\n    \"montantTotalAchat\": 456,\r\n    \"idProduit\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Achats/AddUserFournisseur",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Achats",
+								"AddUserFournisseur"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Fournisseur User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newQuantite\": 16,\r\n    \"id_vendeur\": 2,\r\n    \"roleVendeur\": 0,\r\n    \"id_acheteur\": 1,\r\n    \"quantiteAchete\": 1,\r\n    \"montantTotalAchat\": 24,\r\n    \"idProduit\": 13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Achats/AddFournisseurUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Achats",
+								"AddFournisseurUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Factures",
+			"item": [
+				{
+					"name": "Get All Facture",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Factures/getAllFacture/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Factures",
+								"getAllFacture",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Facture Non Archiver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Factures/getFactureNonArchiver/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Factures",
+								"getFactureNonArchiver",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Archivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Factures/archivation/2/archiver",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Factures",
+								"archivation",
+								"2",
+								"archiver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Factures/deleteFacture/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Factures",
+								"deleteFacture",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "Get Product In Stock By Id Acheteur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Stocks/getProductInStockByIdAcheteur/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Stocks",
+								"getProductInStockByIdAcheteur",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product In Stock By Id Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Stocks/SearchProduitsById/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Stocks",
+								"SearchProduitsById",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quantite For Produits In Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Stocks/getQuantiteForProduitsInStock/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Stocks",
+								"getQuantiteForProduitsInStock",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Produits For User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Stocks/GetProduitsForUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Stocks",
+								"GetProduitsForUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Stocks/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Stocks",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alertes",
+			"item": [
+				{
+					"name": "Delete Alerte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/deleteAlerte/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"deleteAlerte",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Alertes By User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/getAlertesByUserId/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"getAlertesByUserId",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Condition Alerte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/getConditionAlerte",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"getConditionAlerte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Condition Alerte By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/getConditionAlerteById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"getConditionAlerteById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ids Alerte Config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/getIdsAlerteConfig/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"getIdsAlerteConfig",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Value Condition Alerte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/getValueConditionAlerte/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"getValueConditionAlerte",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Alerte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/addAlerte/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"addAlerte",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Config Alerte",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"conditionAlert\": \"3\",\r\n  \"valueLimitCondition\": \"0\",\r\n  \"messageAlert\": \"test message Alert\",\r\n  \"id_user\": \"2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/reason-refuge/backend/Alertes/AddConfigAlerte",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"reason-refuge",
+								"backend",
+								"Alertes",
+								"AddConfigAlerte"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "2"
+		}
+	]
+}

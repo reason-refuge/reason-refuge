@@ -121,7 +121,7 @@ if (
             .then(res => res.json())
             .then(data => {
               if (data.message == "Condition Added") {
-                location.replace(`${URLROOT}users/dashboard`);
+                location.replace(`${URLROOT}users/alertes`);
               }
             });
     }

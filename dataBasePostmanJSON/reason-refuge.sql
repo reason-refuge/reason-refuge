@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 21 mai 2023 à 22:27
+-- Généré le : mar. 23 mai 2023 à 17:22
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -36,23 +36,6 @@ CREATE TABLE `achat` (
   `id_vendeur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `achat`
---
-
-INSERT INTO `achat` (`id_achat`, `date_achat`, `montantTotal_achat`, `id_produit`, `id_acheteur`, `id_vendeur`) VALUES
-(1, '2023-05-21', 248, 1, 2, 1),
-(2, '2023-05-21', 248, 1, 2, 1),
-(3, '2023-05-21', 372, 1, 2, 1),
-(4, '2023-05-21', 62, 1, 2, 1),
-(5, '2023-05-21', 62, 1, 2, 1),
-(6, '2023-05-21', 62, 1, 2, 1),
-(7, '2023-05-21', 62, 1, 2, 1),
-(8, '2023-05-21', 62, 1, 2, 1),
-(9, '2023-05-21', 62, 1, 2, 1),
-(10, '2023-05-21', 62, 1, 2, 1),
-(11, '2023-05-21', 62, 1, 2, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -78,6 +61,19 @@ CREATE TABLE `alerte_config` (
   `message_alerte` text NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `alerte_config`
+--
+
+INSERT INTO `alerte_config` (`id_alerte_config`, `id_condition_alerte`, `value_condition_alerte`, `message_alerte`, `id_user`) VALUES
+(1, 1, '', 'achter', 2),
+(2, 2, '', 'Supprimer Un produit', 2),
+(3, 3, '10', 'quantite de un produit dans le stock et inferieur de 10 ', 2),
+(4, 4, '', 'Modification fournisseur', 2),
+(5, 5, '', 'supprimer fournisseur', 2),
+(6, 6, '', 'Ajouter fournisseur', 2),
+(7, 7, '', 'Supprimer Une Facture', 2);
 
 -- --------------------------------------------------------
 
@@ -119,7 +115,11 @@ CREATE TABLE `condition_alerte` (
 INSERT INTO `condition_alerte` (`id_condition_alerte`, `condition_alerte`, `value_condition_alerte_ou_non`, `id_type_alerte`) VALUES
 (1, 'Achat', 0, 1),
 (2, 'Supprimer Produit', 0, 3),
-(3, 'Nombre de Produit dans le stock inferieur de', 1, 2);
+(3, 'Nombre de Produit dans le stock inferieur de', 1, 2),
+(4, 'Modifier fournisseur', 0, 1),
+(5, 'Supprimer fournisseur', 0, 3),
+(6, 'Ajouter Fournisseur', 0, 1),
+(7, 'supprimer facture', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -135,23 +135,6 @@ CREATE TABLE `facture` (
   `archive` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = non archiver | 1 = archiver'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `facture`
---
-
-INSERT INTO `facture` (`id_facture`, `date_facture`, `montantTotal_facture`, `id_acheteur`, `archive`) VALUES
-(1, '2023-05-21', 248, 2, 0),
-(2, '2023-05-21', 248, 2, 0),
-(3, '2023-05-21', 372, 2, 0),
-(4, '2023-05-21', 62, 2, 0),
-(5, '2023-05-21', 62, 2, 0),
-(6, '2023-05-21', 62, 2, 0),
-(7, '2023-05-21', 62, 2, 0),
-(8, '2023-05-21', 62, 2, 0),
-(9, '2023-05-21', 62, 2, 0),
-(10, '2023-05-21', 62, 2, 0),
-(11, '2023-05-21', 62, 2, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -165,13 +148,6 @@ CREATE TABLE `produit` (
   `price_produit` float NOT NULL,
   `id_fournisseur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `produit`
---
-
-INSERT INTO `produit` (`id_produit`, `nom_produit`, `quantite_produit`, `price_produit`, `id_fournisseur`) VALUES
-(1, 'riha fana', 546435447, 62, 1);
 
 -- --------------------------------------------------------
 
@@ -190,13 +166,6 @@ CREATE TABLE `stock` (
   `quantite_stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `stock`
---
-
-INSERT INTO `stock` (`id_stock`, `date_stock`, `montantTotal_stock`, `id_produit`, `id_acheteur`, `id_vendeur`, `role_vendeur`, `quantite_stock`) VALUES
-(1, '2023-05-21', 83, 1, 2, 1, 0, 22);
-
 -- --------------------------------------------------------
 
 --
@@ -212,15 +181,6 @@ CREATE TABLE `utilisateur` (
   `password_user` varchar(255) NOT NULL,
   `role_user` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = user | 1 = admin | 2 = fournisseur'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `utilisateur`
---
-
-INSERT INTO `utilisateur` (`id_user`, `nom_user`, `prenom_user`, `adresse_user`, `email_user`, `password_user`, `role_user`) VALUES
-(1, 'fournisseur', 'fournisseur', 'fournisseur adresse', 'fournisseur@gmail.com', '$2y$10$vFqZha/8U4YBOiHQ9auBSuNH6qpMqM9atpIardznCGF0HKKrnA1xi', 2),
-(2, 'user', 'user', 'user adress', 'user@gmail.com', '$2y$10$MZDlDFELIt0nqAiFb6.aKOrcnzYLU/3vjUoneCwjwAI0EVrpPZ3sO', 0),
-(3, 'admin', 'admin', 'admin adresse', 'admin@gmail.com', '$2y$10$vFqZha/8U4YBOiHQ9auBSuNH6qpMqM9atpIardznCGF0HKKrnA1xi', 1);
 
 --
 -- Index pour les tables déchargées
@@ -300,7 +260,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `achat`
 --
 ALTER TABLE `achat`
-  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_achat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `alerte`
@@ -312,7 +272,7 @@ ALTER TABLE `alerte`
 -- AUTO_INCREMENT pour la table `alerte_config`
 --
 ALTER TABLE `alerte_config`
-  MODIFY `id_alerte_config` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_alerte_config` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `alerte_type`
@@ -324,31 +284,31 @@ ALTER TABLE `alerte_type`
 -- AUTO_INCREMENT pour la table `condition_alerte`
 --
 ALTER TABLE `condition_alerte`
-  MODIFY `id_condition_alerte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_condition_alerte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `facture`
 --
 ALTER TABLE `facture`
-  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id_produit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_produit` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
