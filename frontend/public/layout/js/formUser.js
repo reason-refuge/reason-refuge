@@ -68,6 +68,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
               var emailUpdate = data.result.email;
               var idUpdate = data.result.id_user;
               var code = generateCode();
+              console.log(code);
               Email.send({
                 SecureToken: "405ab507-85ec-4bb9-adc4-e70d73fc03c0",
                 To: `${emailUpdate}`,
