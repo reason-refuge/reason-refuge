@@ -68,6 +68,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
               var emailUpdate = data.result.email;
               var idUpdate = data.result.id_user;
               var code = generateCode();
+              console.log(code)
               Email.send({
                 SecureToken: "405ab507-85ec-4bb9-adc4-e70d73fc03c0",
                 To: `${emailUpdate}`,
@@ -112,7 +113,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                   const codeInput = data2.codeConfirmation;
                   if (code == codeInput) {
                     code_confirm_error.innerHTML = "Code Is Valid";
-                    codeConfirmation.setAttribute(
+                    code_confirm_error.setAttribute(
                       "style",
                       "color: green; cursor:default"
                     );
@@ -174,7 +175,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                             headers: {
                               "Content-Type": "application/json"
                             },
-                            body: JSON.stringify(data)
+                            body: JSON.stringify(data3)
                           }
                         )
                           .then(res => res.json())
@@ -195,7 +196,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                       }
 
                       var errorPass = " ";
-                      if (data.password.length < 8) {
+                      if (pass.length < 8) {
                         errorPass +=
                           "Password must be at least 8 characters long ";
                         password_error.innerHTML = errorPass;
@@ -204,7 +205,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                           "color: red; cursor:default"
                         );
                       }
-                      if (!/[A-Z]/.test(data.password)) {
+                      if (!/[A-Z]/.test(pass)) {
                         errorPass +=
                           "Password must contain at least one uppercase letter ";
                         password_error.innerHTML = errorPass;
@@ -213,7 +214,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                           "color: red; cursor:default"
                         );
                       }
-                      if (!/[a-z]/.test(data.password)) {
+                      if (!/[a-z]/.test(pass)) {
                         errorPass +=
                           "Password must contain at least one lowercase letter ";
                         password_error.innerHTML = errorPass;
@@ -222,7 +223,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                           "color: red; cursor:default"
                         );
                       }
-                      if (!/\d/.test(data.password)) {
+                      if (!/\d/.test(pass)) {
                         errorPass +=
                           "Password must contain at least one number ";
                         password_error.innerHTML = errorPass;
@@ -231,7 +232,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                           "color: red; cursor:default"
                         );
                       }
-                      if (data.password == " ") {
+                      if (pass == " ") {
                         errorPass = "Password Can't Be Empty";
                         password_error.innerText = errorPass;
                         password_error.setAttribute(

@@ -22,7 +22,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
         },
       })
         .then(res => res.json())
-        .then(data => {
+        .then(data => { 
             totalUsers.innerText = data.result
         })
 }

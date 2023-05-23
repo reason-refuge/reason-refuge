@@ -23,7 +23,8 @@ class Users extends Controller
         if ($totalUser == 0) {
             echo json_encode(
                 array(
-                    'message' => '0 User'
+                    'message' => '0 User',
+                    'result' => 0
                 )
             );
         } else {
