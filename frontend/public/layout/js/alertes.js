@@ -6,7 +6,7 @@ if (
   ID_USER === "undefined" ||
   (ROLE_USER == 3 || ROLE_USER == 2 || ROLE_USER == 1)
 ) {
-  location.replace(`${URLROOT}user`);
+  location.replace(`${URLROOT}users`);
 } else {
   const addConfigAlert = document.getElementById("addConfigAlert");
   const conditionAlert = document.getElementById("conditionAlert");
