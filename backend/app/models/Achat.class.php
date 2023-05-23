@@ -21,6 +21,19 @@ class Achat
         } else
             return 0;
     }
+    public function checkIfProductIssetInStock($id_produit,$id_acheteur,$id_vendeur)
+    {
+        $this->db->query('SELECT * FROM `stock` WHERE `id_produit` = :id_produit AND `id_acheteur` = :id_acheteur AND `id_vendeur` = :id_vendeur');
+        $this->db->bind(':id_produit', $id_produit);
+        $this->db->bind(':id_acheteur', $id_acheteur);
+        $this->db->bind(':id_vendeur', $id_vendeur);
+        $this->db->execute();
+        $row = $this->db->fetch();
+        if ($row) {
+            return 1;
+        } else
+            return 0;
+    }
     public function add($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur)
     {
         $this->db->query('INSERT INTO `achat`(`montantTotal_achat`, `id_produit`, `id_acheteur`, `id_vendeur`) VALUES (:montantTotalAchat, :idProduit, :id_acheteur ,:id_vendeur)');
@@ -43,7 +56,17 @@ class Achat
         } else
             return false;
     }
-    public function addStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete,$roleVendeur)
+    public function changeQuantiteInStock($newQuantite, $id_stock)
+    {
+        $this->db->query('UPDATE `stock` SET `quantite_stock`= :newQuantite WHERE `id_stock` = :id_stock');
+        $this->db->bind(':newQuantite', $newQuantite);
+        $this->db->bind(':id_stock', $id_stock);
+        if ($this->db->execute()) {
+            return true;
+        } else
+            return false;
+    }
+    public function addStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete, $roleVendeur)
     {
         $this->db->query('INSERT INTO `stock`(`montantTotal_stock`, `id_produit`, `id_acheteur`, `id_vendeur`, `quantite_stock`,`role_vendeur`) VALUES (:montantTotalAchat, :idProduit, :id_acheteur, :id_vendeur, :quantiteAchete,:roleVendeur)');
         $this->db->bind(':quantiteAchete', $quantiteAchete);
@@ -57,7 +80,7 @@ class Achat
         } else
             return false;
     }
-    public function fetchStock($idProduit, $id_acheteur, $id_vendeur,$roleVendeur)
+    public function fetchStock($idProduit, $id_acheteur, $id_vendeur, $roleVendeur)
     {
         $this->db->query('SELECT * FROM `stock` WHERE `id_produit` = :idProduit AND `id_acheteur` = :id_acheteur AND `id_vendeur` = :id_vendeur AND `role_vendeur` = :roleVendeur');
         $this->db->bind(':id_vendeur', $id_vendeur);
@@ -68,13 +91,42 @@ class Achat
 
         return $row;
     }
-    public function changeStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete,$roleVendeur)
+    public function fetchStockInSdtock($id_stock)
     {
-        $row = $this->fetchStock($idProduit, $id_acheteur, $id_vendeur,$roleVendeur);
-        $id_stock = $row-> id_stock;
-        $quantiteStock = $row-> quantite_stock;
+        $this->db->query('SELECT * FROM `stock` WHERE `id_stock` = :id_stock');
+        $this->db->bind(':id_stock', $id_stock);
+        $row = $this->db->fetch();
+
+        return $row;
+    }
+    public function changeStock($montantTotalAchat, $idProduit, $id_acheteur, $id_vendeur, $quantiteAchete, $roleVendeur)
+    {
+        $row = $this->fetchStock($idProduit, $id_acheteur, $id_vendeur, $roleVendeur);
+        $id_stock = $row->id_stock;
+        $quantiteStock = $row->quantite_stock;
         $newQuantiteStock = $quantiteStock + $quantiteAchete;
-        $montantTotalStock = $row-> montantTotal_stock;
+        $montantTotalStock = $row->montantTotal_stock;
+        $newMontantTotalStock = $montantTotalStock + $montantTotalAchat;
+
+        $currentDateTime = date('Y-m-d');
+
+        $this->db->query('UPDATE `stock` SET `montantTotal_stock`=:newMontantTotalStock,`quantite_stock`=:newQuantiteStock,`date_stock` = :date_stock WHERE `id_stock`=:id_stock');
+        $this->db->bind(':newQuantiteStock', $newQuantiteStock);
+        $this->db->bind(':newMontantTotalStock', $newMontantTotalStock);
+        $this->db->bind(':date_stock', $currentDateTime);
+        $this->db->bind(':id_stock', $id_stock);
+        if ($this->db->execute()) {
+            return true;
+        } else
+            return false;
+    }
+    public function changeStockInStock($montantTotalAchat, $quantiteAchete,$idProduit, $id_acheteur, $id_vendeur, $roleVendeur)
+    {
+        $row = $this->fetchStock($idProduit, $id_acheteur, $id_vendeur, $roleVendeur);
+        $id_stock = $row->id_stock;
+        $quantiteStock = $row->quantite_stock;
+        $newQuantiteStock = $quantiteStock + $quantiteAchete;
+        $montantTotalStock = $row->montantTotal_stock;
         $newMontantTotalStock = $montantTotalStock + $montantTotalAchat;
 
         $currentDateTime = date('Y-m-d');

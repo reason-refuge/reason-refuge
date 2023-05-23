@@ -1,3 +1,5 @@
+const ROLE_USER = localStorage.getItem("ROLE_USER");
+const ID_USER = localStorage.getItem("ID_USER");
 if (
   !ID_USER ||
   ID_USER === "null" ||
@@ -9,7 +11,7 @@ if (
   const cardsProduct = document.getElementById("cardsProduct");
   const noProduit = document.getElementById("noProduit");
 
-  fetch(`${BACK_URLROOT}Produits/GetProduits`, {
+  fetch(`${BACK_URLROOT}Stocks/GetProduitsForUser`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -17,7 +19,7 @@ if (
   })
     .then(res => res.json())
     .then(data => {
-      if (data.message == "Produits Issets") {
+      if (data.message == "Products Isset In Stock") {
         var card = ``;
         for (let i = 0; i < data.result.length; i++) {
           card += `<div class="card cardMe">
@@ -26,8 +28,8 @@ if (
                                 .nom_produit}</h5>
                               <h6 class="card-subtitle mb-2 text-muted">${data
                                 .result[i].price_produit}DH</h6>
-                              <span class="btn btn-success" onclick="achatUser(${data
-                                .result[i].id_produit})">
+                              <span class="btn btn-success" onclick="achatFournisseur(${data
+                                .result[i].id_stock})">
                                   <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                               </span>
                           </div>
@@ -38,9 +40,9 @@ if (
         noProduit.innerText = "Pas De Produit";
       }
     });
-  function achatUser(id) {
+  function achatFournisseur(id) {
     const achatProduit = document.getElementById("achatProduit");
-    fetch(`${BACK_URLROOT}Produits/SearchProduitsById/${id}`, {
+    fetch(`${BACK_URLROOT}Stocks/SearchProduitsById/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -48,13 +50,14 @@ if (
     })
       .then(res => res.json())
       .then(data => {
-        if (data.message == "Produit Isset") {
+        if (data.message == "Produit Isset In Stock") {
           var result = data.result;
           var form = `<form id="achatProduitForm">
                           <div class="divForm">
                               <label for="nom">Nom</label>
                               <input type="text" name="nom" placeholder="Nom" readonly value="${result.nom_produit}">
-                              <input type="hidden" name="id_vendeur" value="${result.id_fournisseur}">
+                              <input type="hidden" name="id_vendeur" value="${result.id_acheteur}">
+                              <input type="hidden" name="id_produit" value="${result.id_produit}">
                           </div>
                           <div class="divForm">
                               <label for="prix">Prix</label>
@@ -91,9 +94,9 @@ if (
             const formData = new FormData(achatProduitForm);
             const data = Object.fromEntries(formData);
 
-            if (data.quantité > result.quantite_produit) {
+            if (data.quantité > result.quantite_stock) {
               var alertDiv = `<div class="alert alert-warning" role="alert">
-                                      La quantité ${data.quantité} que vous entrer est superieur de ${result.quantite_produit} qui est la quantité qui se trouve dans le stock. Entrez-une nouvelle quantité
+                                      La quantité ${data.quantité} que vous entrer est superieur de ${result.quantite_stock} qui est la quantité qui se trouve dans le stock. Entrez-une nouvelle quantité
                                   </div>`;
               alertInForm.innerHTML = alertDiv;
             } else {
@@ -102,24 +105,28 @@ if (
                                   </div>`;
               alertInForm.innerHTML = alertDiv;
 
-              var newQuantite = result.quantite_produit - data.quantité;
+              var newQuantite = result.quantite_stock - data.quantité;
               var id_vendeur = data.id_vendeur;
-              var roleVendeur = ROLE_USER;
+              var roleVendeur = 0;
 
               var id_acheteur = ID_USER;
               var quantiteAchete = data.quantité;
               var montantTotalAchat = data.prix;
+              var id_produit = data.id_produit;
 
               var achatData = {
+                id_stock: parseInt(id),
                 newQuantite: parseInt(newQuantite),
+                id_produit: parseInt(id_produit),
                 id_vendeur: parseInt(id_vendeur),
                 id_acheteur: parseInt(id_acheteur),
                 quantiteAchete: parseInt(quantiteAchete),
                 montantTotalAchat: parseFloat(montantTotalAchat),
-                idProduit: parseFloat(id),
                 roleVendeur: parseInt(roleVendeur)
               };
-              fetch(`${BACK_URLROOT}Achats/AddUserFournisseur`, {
+              // console.log(achatData);
+              // throw new Error("Terminating the script");
+              fetch(`${BACK_URLROOT}Achats/AddFournisseurUser`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"

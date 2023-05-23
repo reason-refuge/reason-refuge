@@ -13,8 +13,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav ml-auto mr-md-3">
-						<li class="nav-item"><a href="<?= URLROOT ?>fournisseur/home" class="nav-link">Home</a></li>
+						<!-- <li class="nav-item"><a href="<?= URLROOT ?>fournisseur/home" class="nav-link">Home</a></li> -->
 						<li class="nav-item"><a href="<?= URLROOT ?>fournisseur/produits" class="nav-link">Produits</a></li>
+						<li class="nav-item"><a href="<?= URLROOT ?>fournisseur/stock" class="nav-link">Stock</a></li>
+						<li class="nav-item"><a href="<?= URLROOT ?>fournisseur/factures" class="nav-link">Factures</a></li>
+						<li class="nav-item"><a href="<?= URLROOT ?>fournisseur/achats" class="nav-link">Achats</a></li>
 					</ul>
 				</div>
 			</div>

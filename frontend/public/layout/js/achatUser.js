@@ -106,7 +106,7 @@ if (
 
               var newQuantite = result.quantite_produit - data.quantité;
               var id_vendeur = data.id_vendeur;
-              var roleVendeur = ROLE_USER;
+              var roleVendeur = 2;
 
               var id_acheteur = ID_USER;
               var quantiteAchete = data.quantité;

@@ -1,5 +1,7 @@
 .MisEnForm {
   margin-top: 7rem !important;
+  display: flex;
+  justify-content: center;
 }
 
 .icon {

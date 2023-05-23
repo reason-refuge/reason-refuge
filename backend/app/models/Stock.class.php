@@ -13,10 +13,23 @@ class Stock
         $row = $this->db->fetchAll();
         return $row;
     }
+    public function SearchProduitsById($id_stock)
+    {
+        $this->db->query("SELECT * FROM `stock`st,`produit` po  WHERE po.`id_produit` = st.`id_produit` AND st.`id_stock` = :id_stock");
+        $this->db->bind(':id_stock', $id_stock);
+        $row = $this->db->fetch();
+        return $row;
+    }
     public function getProduitsInStock($id_user)
     {
         $this->db->query("SELECT * FROM `stock` WHERE `id_acheteur` = :id_user");
         $this->db->bind(':id_user', $id_user);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
+    public function GetProduitsForUser()
+    {
+        $this->db->query("SELECT * FROM `stock`st,`utilisateur`ut, `produit` pr WHERE st.id_acheteur = ut.id_user AND ut.role_user = 0 AND pr.id_produit = st.id_produit AND st.quantite_stock > 0");
         $row = $this->db->fetchAll();
         return $row;
     }

@@ -506,5 +506,5 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
   var clickMe = document.getElementById("click");
   clickMe.click();
 } else {
-  location.replace(`${URLROOT}Fournisseur/home`);
+  location.replace(`${URLROOT}Fournisseur/produits`);
 }
