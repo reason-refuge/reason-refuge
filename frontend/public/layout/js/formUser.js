@@ -113,7 +113,7 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                   const codeInput = data2.codeConfirmation;
                   if (code == codeInput) {
                     code_confirm_error.innerHTML = "Code Is Valid";
-                    codeConfirmation.setAttribute(
+                    code_confirm_error.setAttribute(
                       "style",
                       "color: green; cursor:default"
                     );
