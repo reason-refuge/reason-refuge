@@ -17,7 +17,6 @@
 						<li class="nav-item"><a href="<?= URLROOT ?>users/dashboard" class="nav-link">Dashboard</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/fournisseurs" class="nav-link">Fournisseurs</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/alertes" class="nav-link">Alertes Controle</a></li>
-						<li class="nav-item"><a href="<?= URLROOT ?>users/produits" class="nav-link">Produits</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/factures" class="nav-link">Factures</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/stock" class="nav-link">Stock</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/achats" class="nav-link">Achats</a></li>

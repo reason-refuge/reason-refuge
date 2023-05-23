@@ -1,11 +1,15 @@
 <?php include_once './views/inc/header.inc.php' ?>
 <input type="hidden" value="Produits" id="activeLi">
-<?php include_once './views/inc/navbarUser.inc.php' ?>
+<?php include_once './views/inc/navbarFournisseur.inc.php' ?>
 <div class="MisEnForm">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="search">
+                    <a href="<?= URLROOT ?>fournisseur/addProduit" class="btn btn-primary btnMeAdd">
+                        <i class="fa fa-plus"></i>
+                        Ajouter Produit
+                    </a>
                     <form onsubmit="event.preventDefault();" role="search">
                         <input id="searchByIDInput" type="search" placeholder="Search By ID" autofocus required />
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -23,6 +27,7 @@
                                 <th data-priority="1">Nom</th>
                                 <th data-priority="2">Quantité</th>
                                 <th data-priority="3">Prix</th>
+                                <th data-priority="4">Action</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyTrs"></tbody>
@@ -30,6 +35,7 @@
                     <span id="noProduit"></span>
                 </div>
             </div>
+            <div class="formEditDiv" id="formEditDiv"></div>
         </div>
     </div>
 </div>

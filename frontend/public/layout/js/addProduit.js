@@ -5,11 +5,13 @@ if (
   !ID_USER ||
   ID_USER === "null" ||
   ID_USER === "undefined" ||
-  (ROLE_USER == 3 || ROLE_USER == 2 || ROLE_USER == 1)
+  (ROLE_USER == 3 || ROLE_USER == 0 || ROLE_USER == 1)
 ) {
-  location.replace(`${URLROOT}users`);
+  location.replace(`${URLROOT}fourniseur`);
 } else {
   const addProduit = document.getElementById("addProduit");
+
+  const user_id_fournisseur = document.getElementById("user_id_fournisseur");
 
   const nom_error = document.getElementById("nom_error");
   const quantité_error = document.getElementById("quantité_error");
@@ -17,6 +19,8 @@ if (
 
   const changeQuantite = document.getElementById("changeQuantite");
 
+  user_id_fournisseur.value = ID_USER
+  
   var errorNom = 0;
   var errorQuantité = 0;
   var errorPrix = 0;
@@ -73,7 +77,7 @@ if (
         .then(res => res.json())
         .then(data => {
           if (data.message == "Produit Added") {
-            location.replace(`${URLROOT}users/produits`);
+            location.replace(`${URLROOT}fournisseur/produits`);
           }
         });
     }

@@ -6,12 +6,13 @@ class Produit
     {
         $this->db = new Database;
     }
-    public function AddProduit($nom, $quantité, $prix)
+    public function AddProduit($nom, $quantité, $prix,$id_user)
     {
 
-        $this->db->query('INSERT INTO produit (nom_produit,quantite_produit,price_produit) VALUES (:nom,:quantite,:prix)');
+        $this->db->query('INSERT INTO produit (nom_produit,quantite_produit,price_produit,id_fournisseur) VALUES (:nom,:quantite,:prix,:id_user)');
         $this->db->bind(':nom', $nom);
         $this->db->bind(':quantite', $quantité);
+        $this->db->bind(':id_user', $id_user);
         $this->db->bind(':prix', $prix);
         if ($this->db->execute()) {
             return true;

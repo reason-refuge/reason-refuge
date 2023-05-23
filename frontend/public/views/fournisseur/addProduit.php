@@ -1,6 +1,6 @@
 <?php include_once './views/inc/header.inc.php' ?>
 <input type="hidden" value="Produits" id="activeLi">
-<?php include_once './views/inc/navbarUser.inc.php' ?>
+<?php include_once './views/inc/navbarFournisseur.inc.php' ?>
 <div class="MisEnForm">
     <form id="addProduit">
         <div class="divForm">
@@ -19,6 +19,7 @@
             <span id="prix_error"></span>
         </div>
         <div class="divForm">
+            <input type="hidden" id="user_id_fournisseur" name="id_user">
             <input type="submit" value="Save">
         </div>
     </form>

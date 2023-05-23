@@ -8,6 +8,42 @@ function cacherAlert() {
   saidBar.setAttribute("class", "topMe");
 }
 
+function addAlerteLierAuStock() {
+  fetch(`${BACK_URLROOT}Stocks/getQuantiteForProduitsInStock/${ID_USER}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.message == "Quantites For Produits Isset") {
+        var quantityInStock = data.result;
+        fetch(`${BACK_URLROOT}Alertes/getValueConditionAlerte/${ID_USER}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.message == "Value Condition Alerte Isset") {
+              var result = data.result;
+              for (let i = 0; i < result.length; i++) {
+                const quantity = result[i];
+                for (let j = 0; j < quantityInStock.length; j++) {
+                  const oneQuantityInStock = quantityInStock[j];
+                  if (quantity > oneQuantityInStock) {
+                    addAlerteNonLierAuStock(3);
+                  }
+                }
+              }
+            }
+          });
+      }
+    });
+}
+
 function afficherAlert() {
   addAlerteLierAuStock();
   AlertId.setAttribute("onclick", "cacherAlert()");
@@ -58,38 +94,7 @@ function deleteAlert(id) {
       }
     });
 }
-function addAlerteLierAuStock() {
-  fetch(`${BACK_URLROOT}Stocks/getQuantiteForProduitsInStock/${ID_USER}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.message == "Quantites For Produits Isset") {
-        var quantityInStock = data.result;
-        fetch(`${BACK_URLROOT}Alertes/getValueConditionAlerte/${ID_USER}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.message == "Value Condition Alerte Isset") {
-              var result = data.result;
-              for (let i = 0; i < result.length; i++) {
-                const quantity = result[i];
-                if (quantity > quantityInStock) {
-                  addAlerteNonLierAuStock(3);
-                }
-              }
-            }
-          });
-      }
-    });
-}
+
 function addAlerteNonLierAuStock(id_alerte_config) {
   fetch(
     `${BACK_URLROOT}Alertes/getIdsAlerteConfig/${id_alerte_config}/${ID_USER}`,

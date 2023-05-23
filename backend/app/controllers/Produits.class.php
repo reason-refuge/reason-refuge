@@ -21,8 +21,9 @@ class Produits extends Controller
         $nom = $data->nom;
         $quantité = $data->quantité;
         $prix = $data->prix;
+        $id_user = $data->id_user;
 
-        if ( $this->produitModel->AddProduit( $nom, $quantité, $prix ) ) {
+        if ( $this->produitModel->AddProduit( $nom, $quantité, $prix, $id_user ) ) {
             echo json_encode(
                 array(
                     'message' => 'Produit Added'
