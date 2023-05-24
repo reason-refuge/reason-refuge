@@ -166,7 +166,7 @@ var emailUpdate = data.result.email_user;
                             headers: {
                               "Content-Type": "application/json"
                             },
-                            body: JSON.stringify(data)
+                            body: JSON.stringify(data3)
                           }
                         )
                           .then(res => res.json())
@@ -187,7 +187,7 @@ var emailUpdate = data.result.email_user;
                       }
 
                       var errorPass = " ";
-                      if (data.password.length < 8) {
+                      if (pass.length < 8) {
                         errorPass +=
                           "Password must be at least 8 characters long ";
                         password_error.innerHTML = errorPass;
@@ -196,7 +196,7 @@ var emailUpdate = data.result.email_user;
                           "color: red; cursor:default"
                         );
                       }
-                      if (!/[A-Z]/.test(data.password)) {
+                      if (!/[A-Z]/.test(pass)) {
                         errorPass +=
                           "Password must contain at least one uppercase letter ";
                         password_error.innerHTML = errorPass;
@@ -205,7 +205,7 @@ var emailUpdate = data.result.email_user;
                           "color: red; cursor:default"
                         );
                       }
-                      if (!/[a-z]/.test(data.password)) {
+                      if (!/[a-z]/.test(pass)) {
                         errorPass +=
                           "Password must contain at least one lowercase letter ";
                         password_error.innerHTML = errorPass;
@@ -214,7 +214,7 @@ var emailUpdate = data.result.email_user;
                           "color: red; cursor:default"
                         );
                       }
-                      if (!/\d/.test(data.password)) {
+                      if (!/\d/.test(pass)) {
                         errorPass +=
                           "Password must contain at least one number ";
                         password_error.innerHTML = errorPass;
@@ -223,7 +223,7 @@ var emailUpdate = data.result.email_user;
                           "color: red; cursor:default"
                         );
                       }
-                      if (data.password == " ") {
+                      if (pass == " ") {
                         errorPass = "Password Can't Be Empty";
                         password_error.innerText = errorPass;
                         password_error.setAttribute(
