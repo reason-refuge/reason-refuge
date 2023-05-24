@@ -65,20 +65,11 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                 "style",
                 "color: green; cursor:default"
               );
-              var emailUpdate = data.result.email;
+var emailUpdate = data.result.email_user;
               var idUpdate = data.result.id_user;
-              var code = generateCode();
-              console.log(code);
-              Email.send({
-                SecureToken: "405ab507-85ec-4bb9-adc4-e70d73fc03c0",
-                To: `${emailUpdate}`,
-                From: "uanemaro216@gmail.com",
-                Subject: "Reset Password",
-                Body: `<b>Please confirm your email</b> <br>This email has been sent to verify that ${data
-                  .result
-                  .email} and Reset Password<br>Your Confirmation Code is <b>${code}</b>`
-              }).then(message => {
+              var code = sendMail(emailUpdate);
                 alert("check your inbox or spam in your gmail");
+
                 var newForm2 = `<div class="d-flex">
                                 <div class="w-100">
                                     <h3 class="mb-4">Forgot Password User</h3>
@@ -255,7 +246,6 @@ if ((!ID_USER || ID_USER === "null" || ID_USER === "undefined") || (ROLE_USER ==
                     );
                   }
                 });
-              });
             }
           });
       }

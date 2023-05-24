@@ -72,7 +72,7 @@ if (
                       </form>
                       <span id="alertInForm"></span>`;
           achatProduit.innerHTML = form;
-          achatProduit.style.display = "block";
+          achatProduit.style.display = "flex";
 
           const prix_produit = document.getElementById("prix_produit");
           const changeQuantite = document.getElementById("changeQuantite");
