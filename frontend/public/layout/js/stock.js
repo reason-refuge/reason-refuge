@@ -57,4 +57,20 @@ if (
           }
         });
     }
+    function viderStock() {
+      fetch(`${BACK_URLROOT}Stocks/viderStock/${ID_USER}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message == "Stock Est Vider") {
+            tbodyTrs.innerHTML = ''
+            noProduit.innerText = 'Pas De Produit'
+            addAlerteNonLierAuStock(8)
+          }
+        });
+    }
 }

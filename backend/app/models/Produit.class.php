@@ -37,9 +37,10 @@ class Produit
         $row = $this->db->fetchAll();
         return $row;
     }
-    public function getProduitById($id){
-        $this->db->query("SELECT * FROM produit WHERE id_produit = :id AND quantite_produit > 0");
+    public function getProduitById($id,$id_user){
+        $this->db->query("SELECT * FROM produit WHERE id_produit = :id AND quantite_produit > 0 AND id_fournisseur = :id_user");
         $this->db->bind(':id', $id);
+        $this->db->bind(':id_user', $id_user);
         $row = $this->db->fetch();
         return $row;
     }
@@ -61,9 +62,16 @@ class Produit
         else
             return false;
     }
-    public function getProduitByLibel($libel)
+    public function getProduitByLibel($libel,$id_user)
     {
-        $sql = "SELECT * FROM produit WHERE (nom_produit LIKE '%".$libel."%' OR quantite_produit LIKE '%".$libel."%' OR price_produit LIKE '%".$libel."%') AND quantite_produit > 0";
+        $sql = "SELECT * FROM produit WHERE (nom_produit LIKE '%".$libel."%' OR quantite_produit LIKE '%".$libel."%' OR price_produit LIKE '%".$libel."%') AND quantite_produit > 0 AND id_fournisseur = $id_user";
+        $this->db->query($sql);
+        $row = $this->db->fetchAll();
+        return $row;
+    }
+    public function getProduitById_User($id_user)
+    {
+        $sql = "SELECT * FROM produit WHERE id_fournisseur = $id_user";
         $this->db->query($sql);
         $row = $this->db->fetchAll();
         return $row;

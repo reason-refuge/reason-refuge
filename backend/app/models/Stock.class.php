@@ -43,4 +43,12 @@ class Stock
         else
             return false;
     }
+    public function viderStock($id_user){
+        $this->db->query("DELETE FROM stock WHERE id_acheteur = :id_user");
+        $this->db->bind(':id_user', $id_user);
+        if ($this->db->execute())
+            return true;
+        else
+            return false;
+    }
 }

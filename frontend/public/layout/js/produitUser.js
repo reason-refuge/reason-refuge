@@ -1,13 +1,12 @@
-const ID_USER = localStorage.getItem("ID_USER");
 const ROLE_USER = localStorage.getItem("ROLE_USER");
 
 if (
   !ID_USER ||
   ID_USER === "null" ||
   ID_USER === "undefined" ||
-  (ROLE_USER == 3 || ROLE_USER == 0 || ROLE_USER == 1)
+  (ROLE_USER == 3 || ROLE_USER == 2 || ROLE_USER == 1)
 ) {
-  location.replace(`${URLROOT}fournisseur`);
+  location.replace(`${URLROOT}users`);
 } else {
   const tbodyTrs = document.getElementById("tbodyTrs");
   const noProduit = document.getElementById("noProduit");
@@ -64,27 +63,26 @@ if (
           if (data.message == "Produits Issets") {
             var tr = ``;
             for (let i = 0; i < data.result.length; i++) {
-              tr += `<tr id="tr${data.result.id_produit}">
-                        <td>${data.result.id_produit}</td>
-                        <td id="nom${data.result.id_produit}">
-                          ${data.result.nom_produit}
-                        </td>
-                        <td id="quantité${data.result.id_produit}">
-                          ${data.result.quantite_produit}
-                        </td>
-                        <td id="prix${data.result[i].id_produit}">
-                          ${data.result[i].price_produit}DH
-                        </td>
-                        <td>
-                          <span class="btnActionUser">
-                            <i class ="fa fa-edit" aria-hidden="true" onclick="editProduit(${data.result[i].id_produit})"></i>
-                            <i class ="fa fa-close" onclick="deleteProduit(${data.result[i].id_produit})"></i>
-                          </span>
-                        </td>
-                      </tr>`;
+              tr += `<tr id="tr${data.result[i].id_produit}">
+                            <td>${data.result[i].id_produit}</td>
+                            <td id="nom${data.result[i].id_produit}">
+                              ${data.result[i].nom_produit}
+                            </td>
+                            <td id="quantité${data.result[i].id_produit}">
+                              ${data.result[i].quantite_produit}
+                            </td>
+                            <td id="prix${data.result[i].id_produit}">
+                              ${data.result[i].price_produit}DH
+                            </td>
+                            <td>
+                              <span class="btnActionUser">
+                                <i class ="fa fa-edit" aria-hidden="true" onclick="editProduit(${data.result[i].id_produit})"></i>
+                                <i class ="fa fa-close" onclick="deleteProduit(${data.result[i].id_produit})"></i>
+                              </span>
+                            </td>
+                          </tr>`;
             }
             tbodyTrs.innerHTML = tr;
-            noProduit.innerText = "";
           } else {
             noProduit.innerText = "Pas De Produit";
           }
@@ -172,7 +170,7 @@ if (
   });
     function editProduit(id) {
       const formEditDiv = document.getElementById("formEditDiv");
-      fetch(`${BACK_URLROOT}Produits/SearchProduitsById/${id}`, {
+      fetch(`${BACK_URLROOT}Produits/SearchProduitsById/${id}/${ID_USER}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -203,7 +201,7 @@ if (
                             </div>
                         </form>`;
             formEditDiv.innerHTML = form;
-            formEditDiv.style.display = "block";
+            formEditDiv.style.display = "flex";
   
             const editProduit = document.getElementById("editProduit");
   

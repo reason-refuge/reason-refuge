@@ -42,7 +42,7 @@ if (
     });
   function achatUser(id) {
     const achatProduit = document.getElementById("achatProduit");
-    fetch(`${BACK_URLROOT}Produits/SearchProduitsById/${id}`, {
+    fetch(`${BACK_URLROOT}Produits/SearchProduitsById/${id}/${ID_USER}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

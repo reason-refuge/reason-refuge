@@ -59,6 +59,27 @@ class Produits extends Controller
             );
         }
     }
+    public function getProduitById_User($id_user)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        $produit = $this->produitModel->getProduitById_User($id_user);
+        if ($produit) {
+            echo json_encode(
+                array(
+                    'message' => 'Produits Issets',
+                    'result' => $produit
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'No Produit')
+            );
+        }
+    }
     public function GetProduitsForUser()
     {
         header('Access-Control-Allow-Origin: *');
@@ -101,13 +122,13 @@ class Produits extends Controller
             );
         }
     }
-    public function  SearchProduitsById($id){
+    public function  SearchProduitsById($id,$id_user){
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: GET');
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
 
-        $produits = $this->produitModel->getProduitById($id);
+        $produits = $this->produitModel->getProduitById($id,$id_user);
         if ($produits) {
             echo json_encode(
                 array(
@@ -184,13 +205,13 @@ class Produits extends Controller
             );
         }
     }
-    public function SearchProduits($libel){
+    public function SearchProduits($libel,$id_user){
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
         header('Access-Control-Allow-Method: GET');
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
 
-        $produits = $this->produitModel->getProduitByLibel($libel);
+        $produits = $this->produitModel->getProduitByLibel($libel,$id_user);
         if ($produits) {
             echo json_encode(
                 array(

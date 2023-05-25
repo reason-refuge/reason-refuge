@@ -5,6 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
+                <div class="search">
+                    <span onclick="viderStock()" class="btn btn-primary btnMeAdd">
+                        <i class="fa fa-close"></i>
+                        Vider Stock
+                    </span>
+                </div>
                 <div class="table-responsive" data-pattern="priority-columns">
                     <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
                         <thead>

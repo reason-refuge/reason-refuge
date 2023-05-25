@@ -15,6 +15,7 @@
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav ml-auto mr-md-3">
 						<!-- <li class="nav-item"><a href="<?= URLROOT ?>users/dashboard" class="nav-link">Dashboard</a></li> -->
+						<li class="nav-item"><a href="<?= URLROOT ?>users/produits" class="nav-link">Produits</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/fournisseurs" class="nav-link">Fournisseurs</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/alertes" class="nav-link">Alertes Controle</a></li>
 						<li class="nav-item"><a href="<?= URLROOT ?>users/factures" class="nav-link">Factures</a></li>

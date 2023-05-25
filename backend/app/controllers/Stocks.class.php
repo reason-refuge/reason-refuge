@@ -116,4 +116,23 @@ class Stocks extends Controller
             );
         }
     }
+    public function viderStock($id_user)
+    {
+        header('Access-Control-Allow-Origin:*');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+
+        if ($this->stockModel->viderStock($id_user)) {
+            echo json_encode(
+                array(
+                    'message' => 'Stock Est Vider'
+                )
+            );
+        } else {
+            echo json_encode(
+                array('message' => 'Stock Est non Vider')
+            );
+        }
+    }
 }
